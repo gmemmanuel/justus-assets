@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Justus BIMI logo — SVG Tiny PS format
+  Required for Gmail sender avatar (Brand Indicators for Message Identification)
+
+  Hosting: serve this file at https://justus.health/bimi-logo.svg (or any public HTTPS URL)
+  DNS record: default._bimi.justus.health TXT "v=BIMI1; l=https://justus.health/bimi-logo.svg"
+
+  Spec compliance:
+  - SVG Tiny 1.2 / baseProfile tiny-ps
+  - No external fonts, scripts, images, or style sheets
+  - Solid background (email clients crop to circle — no transparency needed)
+  - 1:1 aspect ratio
+-->
+<svg xmlns="http://www.w3.org/2000/svg"
+     version="1.2"
+     baseProfile="tiny-ps"
+     viewBox="0 0 240 240"
+     width="240"
+     height="240">
+  <title>Justus</title>
+  <rect width="240" height="240" fill="#5C8A5C"/>
+  <text
+    x="128"
+    y="195"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="185"
+    font-weight="bold"
+    fill="#FAF9F7"
+    text-anchor="middle">J</text>
+</svg>
