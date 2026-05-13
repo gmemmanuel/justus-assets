@@ -15,6 +15,8 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    <!-- LaunchList referral tracking (loads asynchronously) -->
+    <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
     <style>
       :root {
         color-scheme: light;
@@ -140,33 +142,148 @@
         background: var(--accent);
       }
 
-      form {
-        display: flex;
-        gap: 8px;
-        flex-wrap: wrap;
-        max-width: 480px;
+      /* Waitlist card */
+      .waitlist-card {
+        max-width: 520px;
+        background: #fff;
+        border: 1px solid #e0e0d6;
+        border-radius: 20px;
+        padding: 24px;
+        box-shadow: 0 1px 0 rgba(31, 31, 26, 0.02),
+          0 10px 30px rgba(31, 31, 26, 0.04);
       }
 
+      .waitlist-card .card-title {
+        font-family: Georgia, "Times New Roman", serif;
+        font-weight: 600;
+        font-size: 22px;
+        margin: 0 0 4px;
+        color: var(--app-text-primary);
+      }
+
+      .waitlist-card .card-sub {
+        margin: 0 0 20px;
+        font-size: 14px;
+        color: #6b6b5e;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .field {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+
+      .field label,
+      .fieldset-label {
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: #6b6b5e;
+      }
+
+      .field .req {
+        color: var(--accent);
+        margin-left: 2px;
+      }
+
+      input[type="text"],
       input[type="email"] {
-        flex: 1 1 220px;
-        min-width: 0;
-        padding: 14px 16px;
+        width: 100%;
+        padding: 10px 14px;
         font: inherit;
-        font-size: 16px;
+        font-size: 15px;
         border: 1px solid #e0e0d6;
-        border-radius: 12px;
+        border-radius: 10px;
         background: #fff;
         color: var(--app-text-primary);
         outline: none;
-        transition: border-color 0.15s ease;
+        transition: border-color 0.15s ease, box-shadow 0.15s ease;
       }
 
+      input[type="text"]:focus,
       input[type="email"]:focus {
         border-color: var(--accent);
+        box-shadow: 0 0 0 3px rgba(196, 120, 90, 0.12);
       }
 
-      button {
+      input.invalid {
+        border-color: #c84630;
+      }
+
+      input.invalid:focus {
+        box-shadow: 0 0 0 3px rgba(200, 70, 48, 0.12);
+      }
+
+      .field-error {
+        font-size: 13px;
+        color: #c84630;
+        margin: 4px 0 0;
+        min-height: 0;
+      }
+
+      .field-error:empty {
+        display: none;
+      }
+
+      fieldset {
+        border: 0;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+
+      .pill-group {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+      }
+
+      .pill {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        padding: 7px 12px;
+        font-size: 13px;
+        font-weight: 500;
+        border: 1px solid #e0e0d6;
+        border-radius: 999px;
+        background: #fff;
+        color: var(--app-text-primary);
+        cursor: pointer;
+        user-select: none;
+        transition: border-color 0.15s ease, background-color 0.15s ease,
+          color 0.15s ease;
+      }
+
+      .pill input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none;
+      }
+
+      .pill:hover {
+        border-color: #c9c4b1;
+      }
+
+      .pill:has(input:checked) {
+        background: var(--app-text-primary);
+        border-color: var(--app-text-primary);
+        color: var(--page-bg);
+      }
+
+      button[type="submit"] {
+        width: 100%;
         padding: 14px 22px;
+        margin-top: 4px;
         font: inherit;
         font-weight: 600;
         font-size: 15px;
@@ -176,17 +293,10 @@
         border-radius: 12px;
         cursor: pointer;
         transition: background-color 0.15s ease;
-        white-space: nowrap;
       }
 
-      button:hover {
+      button[type="submit"]:hover {
         background: #2a2a2a;
-      }
-
-      .form-note {
-        margin: 12px 0 0;
-        font-size: 13px;
-        color: #9c9c8e;
       }
 
       /* ─── Phone mockup ─── */
@@ -441,20 +551,109 @@
           </li>
         </ul>
 
-        <form id="waitlist" action="#" method="post" novalidate>
-          <input
-            type="email"
-            name="email"
-            placeholder="you@example.com"
-            required
-            autocomplete="email"
-            aria-label="Email address"
-          />
-          <button type="submit">Join the waitlist</button>
-        </form>
-        <p class="form-note">
-          Get early access when the research preview goes live.
-        </p>
+        <!--
+          LaunchList integration:
+          1. Replace the form `action` below with your LaunchList endpoint
+             (e.g. https://getlaunchlist.com/s/XXXXXX) once your account is set up.
+          2. The widget-diy.js script in <head> handles referral tracking automatically.
+          3. Field names (`name`, `email`, `exercise_types`) are captured as-is.
+        -->
+        <div class="waitlist-card">
+          <h2 class="card-title">Join the waitlist</h2>
+          <p class="card-sub">
+            Get early access when the research preview goes live.
+          </p>
+
+          <form
+            id="waitlist"
+            class="launchlist-form"
+            action="REPLACE_WITH_LAUNCHLIST_ENDPOINT"
+            method="post"
+            novalidate
+          >
+            <div class="field">
+              <label for="wl-email">Email <span class="req" aria-hidden="true">*</span></label>
+              <input
+                id="wl-email"
+                type="email"
+                name="email"
+                placeholder="you@example.com"
+                autocomplete="email"
+                required
+                aria-required="true"
+                aria-describedby="wl-email-error"
+              />
+              <p id="wl-email-error" class="field-error" role="alert"></p>
+            </div>
+
+            <div class="field">
+              <label for="wl-name">Name</label>
+              <input
+                id="wl-name"
+                type="text"
+                name="name"
+                placeholder="Your name"
+                autocomplete="name"
+              />
+            </div>
+
+            <fieldset>
+              <legend class="fieldset-label">What kinds of fitness are you into?</legend>
+              <div class="pill-group">
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Running" />Running</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Strength" />Strength</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Cycling" />Cycling</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="HIIT" />HIIT</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="CrossFit" />CrossFit</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Swimming" />Swimming</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Rowing" />Rowing</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Yoga" />Yoga</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Sports" />Sports</label>
+                <label class="pill"><input type="checkbox" name="exercise_types" value="Other" />Other</label>
+              </div>
+            </fieldset>
+
+            <button type="submit">Join the waitlist</button>
+          </form>
+        </div>
+
+        <script>
+          (function () {
+            var form = document.getElementById('waitlist');
+            if (!form) return;
+            var emailInput = document.getElementById('wl-email');
+            var emailError = document.getElementById('wl-email-error');
+
+            function clearError() {
+              emailInput.classList.remove('invalid');
+              emailError.textContent = '';
+            }
+
+            function showError(message) {
+              emailInput.classList.add('invalid');
+              emailError.textContent = message;
+            }
+
+            emailInput.addEventListener('input', clearError);
+
+            form.addEventListener('submit', function (event) {
+              var value = emailInput.value.trim();
+              if (!value) {
+                event.preventDefault();
+                showError('Please enter your email so we can reach you.');
+                emailInput.focus();
+                return;
+              }
+              if (!emailInput.checkValidity()) {
+                event.preventDefault();
+                showError('That email doesn’t look right. Mind double-checking?');
+                emailInput.focus();
+                return;
+              }
+              clearError();
+            });
+          })();
+        </script>
       </div>
 
       <div class="phone-wrap" aria-hidden="true">
