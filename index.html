@@ -619,21 +619,23 @@
               />
             </div>
 
+            <input type="hidden" name="exercise_types" id="exercise-types-hidden" />
+
             <fieldset>
               <legend class="fieldset-label">What kinds of fitness are you into?</legend>
               <div class="pill-group">
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Running" />Running</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Strength" />Strength</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Cycling" />Cycling</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="HIIT" />HIIT</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="CrossFit" />CrossFit</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Swimming" />Swimming</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Rowing" />Rowing</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Yoga" />Yoga</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Triathlon" />Triathlon</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Sports" />Sports</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Nothing Yet" />Nothing yet</label>
-                <label class="pill"><input type="checkbox" name="exercise_types" value="Other" />Other</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Running" />Running</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Strength" />Strength</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Cycling" />Cycling</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="HIIT" />HIIT</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="CrossFit" />CrossFit</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Swimming" />Swimming</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Rowing" />Rowing</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Yoga" />Yoga</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Triathlon" />Triathlon</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Sports" />Sports</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Nothing Yet" />Nothing yet</label>
+                <label class="pill"><input type="checkbox" class="exercise-type" value="Other" />Other</label>
               </div>
             </fieldset>
 
@@ -675,6 +677,14 @@
                 return;
               }
               clearError();
+
+              // Roll up the pill checkboxes into a single comma-separated
+              // value, since LaunchList only stores one value per field.
+              var checked = form.querySelectorAll('.exercise-type:checked');
+              var values = Array.prototype.map.call(checked, function (el) {
+                return el.value;
+              }).join(', ');
+              document.getElementById('exercise-types-hidden').value = values;
             });
           })();
         </script>
