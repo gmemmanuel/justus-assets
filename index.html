@@ -288,6 +288,27 @@
         background: #2a2a2a;
       }
 
+      /* ─── Footer ─── */
+      .site-footer {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 10px;
+        padding: 16px 24px 32px;
+        font-size: 13px;
+        color: #9c9c8e;
+      }
+
+      .site-footer a {
+        color: #6b6b5e;
+        text-decoration: none;
+      }
+
+      .site-footer a:hover {
+        color: var(--app-text-primary);
+        text-decoration: underline;
+      }
+
       /* ─── Phone mockup ─── */
       .phone-wrap {
         width: 360px;
@@ -761,5 +782,11 @@
       </div>
       </div>
     </section>
+
+    <footer class="site-footer">
+      <a href="/privacy/">Privacy</a>
+      <span aria-hidden="true">·</span>
+      <a href="/terms/">Terms</a>
+    </footer>
   </body>
 </html>
