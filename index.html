@@ -3,790 +3,1484 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Justus — Your private AI fitness coach</title>
+    <title>Justus — A private AI fitness coach</title>
     <meta
       name="description"
-      content="Justus plans your workouts, adapts to your life, and remembers everything, privately. No leaderboards, comparisons, or social pressure."
+      content="A private AI fitness coach that learns your history, adapts your plan, and remembers across years. No leaderboards, no streaks, no social features. Just us."
     />
-    <link rel="icon" type="image/svg+xml" href="/bimi-logo.svg" />
+    <link rel="icon" type="image/png" href="/splash-icon.png" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
-    <!-- LaunchList referral tracking (loads asynchronously) -->
+    <!-- LaunchList referral tracking -->
     <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
+    <!-- PostHog analytics (same project as the app for unified funnels) -->
+    <script>
+      !(function (t, e) {
+        var o, n, p, r;
+        e.__SV ||
+          ((window.posthog = e),
+          (e._i = []),
+          (e.init = function (i, s, a) {
+            function g(t, e) {
+              var o = e.split('.');
+              2 == o.length && ((t = t[o[0]]), (e = o[1])),
+                (t[e] = function () {
+                  t.push([e].concat(Array.prototype.slice.call(arguments, 0)));
+                });
+            }
+            ((p = t.createElement('script')).type = 'text/javascript'),
+              (p.crossOrigin = 'anonymous'),
+              (p.async = !0),
+              (p.src =
+                s.api_host.replace('.i.posthog.com', '-assets.i.posthog.com') +
+                '/static/array.js'),
+              (r = t.getElementsByTagName('script')[0]).parentNode.insertBefore(
+                p,
+                r
+              );
+            var u = e;
+            for (
+              void 0 !== a ? (u = e[a] = []) : (a = 'posthog'),
+                u.people = u.people || [],
+                u.toString = function (t) {
+                  var e = 'posthog';
+                  return (
+                    'posthog' !== a && (e += '.' + a), t || (e += ' (stub)'), e
+                  );
+                },
+                u.people.toString = function () {
+                  return u.toString(1) + '.people (stub)';
+                },
+                o =
+                  'init capture register register_once identify alias people.set people.set_once set_config get_distinct_id onFeatureFlags getFeatureFlag isFeatureEnabled reloadFeatureFlags group unregister reset opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing'.split(
+                    ' '
+                  ),
+                n = 0;
+              n < o.length;
+              n++
+            )
+              g(u, o[n]);
+            e._i.push([i, s, a]);
+          }),
+          (e.__SV = 1));
+      })(document, window.posthog || []);
+      posthog.init('phc_pbMi5H1xZJmtZDDOw3plQzjBzs4dt8ohf1nY54Nl9N8', {
+        api_host: 'https://us.i.posthog.com',
+        person_profiles: 'identified_only',
+        capture_pageview: true,
+        capture_pageleave: true,
+      });
+    </script>
+
     <style>
+      /* ─── Tokens (from justus-tokens.css) ─── */
       :root {
-        color-scheme: light;
-        /* Marketing page surface (warmer than app) */
-        --page-bg: #f5f5eb;
-        /* App theme tokens — match constants/theme.ts lightColors */
-        --app-bg: #faf9f7;
-        --app-surface: #ffffff;
-        --app-surface-accent: #f5f3ee;
-        --app-text-primary: #1a1a1a;
-        --app-text-secondary: #6b6b6b;
-        --app-text-tertiary: #9c9c9c;
-        --app-border: #e8e8e8;
-        --accent: #c4785a;
+        --bg-canvas: #faf9f7;
+        --surface: #ffffff;
+        --surface-accent: #f5f3ee;
+        --fg-1: #1a1a1a;
+        --fg-2: #6b6b6b;
+        --fg-3: #9c9c9c;
+        --border: #e8e8e8;
         --success: #5c8a5c;
+        --accent: #c4785a;
+
+        --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI',
+          Roboto, sans-serif;
+        --font-logo: Georgia, 'Times New Roman', serif;
+
+        --fw-semibold: 600;
+        --tracking-logo-s: -0.2px;
+
+        color-scheme: light;
       }
 
-      * {
-        box-sizing: border-box;
-      }
-
+      /* ─── Page shell ─── */
       html,
       body {
-        margin: 0;
-        background: var(--page-bg);
-        color: var(--app-text-primary);
-        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Inter",
-          "Segoe UI", sans-serif;
+        background: var(--bg-canvas);
+        color: var(--fg-1);
+        font-family: var(--font-ui);
         font-size: 16px;
-        line-height: 1.55;
-        overflow-x: clip;
+        line-height: 1.5;
         -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
+        text-rendering: optimizeLegibility;
+        margin: 0;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      .shell {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 64px;
       }
 
-      .hero {
-        width: fit-content;
-        max-width: calc(100% - 48px);
-        margin: 36px auto;
-        padding: 0;
-      }
-
-      .hero-headline {
-        font-family: Georgia, "Times New Roman", serif;
-        font-weight: 600;
-        font-size: clamp(34px, 4.6vw, 56px);
-        line-height: 1.05;
-        letter-spacing: -0.015em;
-        margin: 0 0 28px;
-        white-space: nowrap;
-      }
-
-      .hero-headline .brand-text {
-        color: var(--success);
-      }
-
-      .hero-headline i {
-        font-style: italic;
-      }
-
-      .hero-body {
+      /* ─── Top nav ─── */
+      .nav {
         display: flex;
         justify-content: space-between;
-        align-items: start;
-        gap: 24px;
+        align-items: baseline;
+        padding: 40px 0 0;
       }
-
-      .copy {
-        width: 520px;
-        flex-shrink: 1;
+      .nav .mark {
+        font-family: var(--font-logo);
+        font-weight: var(--fw-semibold);
+        color: var(--success);
+        font-size: 24px;
+        letter-spacing: var(--tracking-logo-s);
       }
-
-      .phone-wrap-outer {
-        flex-shrink: 0;
+      .nav .right {
+        display: flex;
+        align-items: baseline;
+        gap: 28px;
+        font-size: 13px;
+        color: var(--fg-2);
       }
-
-      .copy .sub {
-        font-size: 17px;
-        color: #6b6b5e;
-        margin: 0 0 20px;
+      .nav .right a {
+        color: var(--fg-2);
+        text-decoration: none;
+        transition: color 120ms ease;
       }
-
-      .copy .sub i {
+      .nav .right a:hover {
+        color: var(--fg-1);
+      }
+      .nav .right .stamp {
         font-style: italic;
-        color: var(--app-text-primary);
+        color: var(--fg-3);
       }
 
-      ul.features {
-        list-style: none;
-        padding: 0;
+      /* ─── Hero ─── */
+      .hero {
+        padding: 96px 0 80px;
+        text-align: center;
+      }
+      .hero .word {
+        font-family: var(--font-logo);
+        font-weight: var(--fw-semibold);
+        color: var(--success);
+        font-size: 156px;
+        letter-spacing: -1.6px;
+        line-height: 1;
+      }
+      .hero .word .dot {
+        color: var(--fg-1);
+      }
+      .hero .sub {
+        margin: 28px auto 0;
+        font-style: italic;
+        color: var(--fg-2);
+        font-size: 19px;
+        letter-spacing: 0.1px;
+        max-width: 520px;
+      }
+      .hero .sub em {
+        color: var(--fg-2);
+        font-style: italic;
+      }
+
+      /* Essay */
+      .essay {
+        max-width: 560px;
+        margin: 80px auto 72px;
+        font-size: 18px;
+        line-height: 1.65;
+        color: var(--fg-1);
+      }
+      .essay p {
         margin: 0 0 22px;
       }
-
-      ul.features li {
-        position: relative;
-        padding: 6px 0 6px 26px;
-        font-size: 15px;
-        line-height: 1.45;
-        color: var(--app-text-primary);
+      .essay p:last-child {
+        margin-bottom: 0;
+      }
+      .essay .quiet {
+        color: var(--fg-2);
+      }
+      .essay .green {
+        color: var(--success);
+        font-style: italic;
       }
 
-      ul.features li::before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: 14px;
-        width: 14px;
-        height: 1.5px;
-        background: var(--accent);
+      /* Hairline */
+      .rule {
+        width: 32px;
+        height: 1px;
+        background: var(--fg-3);
+        margin: 0 auto 56px;
+        opacity: 0.5;
+        border: 0;
       }
 
-      /* Waitlist card */
-      .waitlist-card {
-        max-width: 520px;
-        background: #fff;
-        border: 1px solid #e0e0d6;
-        border-radius: 20px;
-        padding: 20px;
-        box-shadow: 0 1px 0 rgba(31, 31, 26, 0.02),
-          0 10px 30px rgba(31, 31, 26, 0.04);
+      /* Inline CTA */
+      .cta {
+        max-width: 460px;
+        margin: 0 auto;
+        text-align: center;
       }
-
-      .waitlist-card .card-title {
-        font-family: Georgia, "Times New Roman", serif;
-        font-weight: 600;
-        font-size: 20px;
-        margin: 0 0 2px;
-        color: var(--app-text-primary);
-      }
-
-      .waitlist-card .card-sub {
-        margin: 0 0 16px;
-        font-size: 14px;
-        color: #6b6b5e;
-      }
-
-      form {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-      }
-
-      .field {
-        display: flex;
-        flex-direction: column;
-        gap: 6px;
-      }
-
-      .field label,
-      .fieldset-label {
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.04em;
+      .cta .eyebrow {
+        font-size: 11px;
+        letter-spacing: 1.2px;
         text-transform: uppercase;
-        color: #6b6b5e;
+        color: var(--fg-2);
+        margin-bottom: 14px;
+        font-weight: 500;
       }
-
-      .field .req {
-        color: var(--accent);
-        margin-left: 2px;
+      .cta h2 {
+        font-family: var(--font-ui);
+        font-weight: var(--fw-semibold);
+        font-size: 24px;
+        margin: 0 0 8px;
+        color: var(--fg-1);
+        letter-spacing: -0.3px;
       }
-
-      input[type="text"],
-      input[type="email"] {
-        width: 100%;
-        padding: 8px 12px;
-        font: inherit;
-        font-size: 14px;
-        border: 1px solid #e0e0d6;
-        border-radius: 9px;
-        background: #fff;
-        color: var(--app-text-primary);
-        outline: none;
-        transition: border-color 0.15s ease, box-shadow 0.15s ease;
+      .cta .cta-sub {
+        font-size: 15px;
+        color: var(--fg-2);
+        margin-bottom: 28px;
       }
-
-      input[type="text"]:focus,
-      input[type="email"]:focus {
-        border-color: var(--accent);
-        box-shadow: 0 0 0 3px rgba(196, 120, 90, 0.12);
+      .form {
+        display: flex;
+        gap: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 6px 6px 22px;
+        align-items: center;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
       }
-
-      input.invalid {
+      .form:focus-within {
+        border-color: var(--fg-2);
+        box-shadow: 0 0 0 4px rgba(92, 138, 92, 0.08);
+      }
+      .form.invalid {
         border-color: #c84630;
+        box-shadow: 0 0 0 4px rgba(200, 70, 48, 0.1);
       }
-
-      input.invalid:focus {
-        box-shadow: 0 0 0 3px rgba(200, 70, 48, 0.12);
+      .form input {
+        flex: 1;
+        min-width: 0;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        font: inherit;
+        font-size: 16px;
+        color: var(--fg-1);
+        padding: 13px 0;
       }
-
-      .field-error {
+      .form input::placeholder {
+        color: var(--fg-3);
+      }
+      .form button {
+        border: 0;
+        background: var(--fg-1);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 13px 22px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: opacity 120ms ease;
+        white-space: nowrap;
+      }
+      .form button:hover {
+        opacity: 0.86;
+      }
+      .form button[disabled] {
+        opacity: 0.5;
+        cursor: default;
+      }
+      .form-error {
+        margin: 12px 0 0;
         font-size: 13px;
         color: #c84630;
-        margin: 4px 0 0;
         min-height: 0;
       }
-
-      .field-error:empty {
+      .form-error:empty {
         display: none;
       }
 
-      fieldset {
-        border: 0;
-        padding: 0;
-        margin: 0;
-      }
-
-      fieldset .fieldset-label {
-        display: block;
-        margin-bottom: 10px;
-      }
-
-      .pill-group {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        gap: 6px;
-      }
-
-      .pill {
-        position: relative;
-        display: inline-flex;
-        align-items: center;
-        padding: 6px 10px;
-        font-size: 13px;
-        font-weight: 500;
-        border: 1px solid #e0e0d6;
-        border-radius: 999px;
-        background: #fff;
-        color: var(--app-text-primary);
-        cursor: pointer;
-        user-select: none;
-        transition: border-color 0.15s ease, background-color 0.15s ease,
-          color 0.15s ease;
-      }
-
-      .pill input {
-        position: absolute;
-        opacity: 0;
-        pointer-events: none;
-      }
-
-      .pill:hover {
-        border-color: #c9c4b1;
-      }
-
-      .pill:has(input:checked) {
-        background: var(--app-text-primary);
-        border-color: var(--app-text-primary);
-        color: var(--page-bg);
-      }
-
-      button[type="submit"] {
-        width: 100%;
-        padding: 12px 22px;
-        margin-top: 2px;
-        font: inherit;
-        font-weight: 600;
-        font-size: 15px;
-        background: var(--app-text-primary);
-        color: var(--page-bg);
-        border: 0;
-        border-radius: 12px;
-        cursor: pointer;
-        transition: background-color 0.15s ease;
-      }
-
-      button[type="submit"]:hover {
-        background: #2a2a2a;
-      }
-
-      /* ─── Footer ─── */
-      .site-footer {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 10px;
-        padding: 16px 24px 32px;
-        font-size: 13px;
-        color: #9c9c8e;
-      }
-
-      .site-footer a {
-        color: #6b6b5e;
-        text-decoration: none;
-      }
-
-      .site-footer a:hover {
-        color: var(--app-text-primary);
-        text-decoration: underline;
-      }
-
-      /* ─── Phone mockup ─── */
-      .phone-wrap {
-        width: 360px;
-        flex-shrink: 0;
-      }
-
-      .phone {
-        width: 360px;
-        max-width: 100%;
-        aspect-ratio: 320 / 640;
-        background: var(--app-bg);
-        border: 1px solid #e8e4d8;
-        border-radius: 44px;
-        box-shadow: 0 30px 80px rgba(31, 31, 26, 0.1),
-          0 8px 20px rgba(31, 31, 26, 0.04);
-        padding: 22px 16px 16px;
+      /* Scroll cue */
+      .scroll-cue {
+        margin: 96px auto 0;
+        width: fit-content;
         display: flex;
         flex-direction: column;
-        overflow: hidden;
-        position: relative;
-        color: var(--app-text-primary);
-      }
-
-      /* Header — matches LandingScreen header: 16px / 600, sans, centered */
-      .phone-header {
-        display: grid;
-        grid-template-columns: 32px 1fr 32px;
         align-items: center;
+        gap: 14px;
+        font-size: 11px;
+        letter-spacing: 1.6px;
+        text-transform: uppercase;
+        color: var(--fg-3);
+        font-weight: 500;
+      }
+      .scroll-cue .line {
+        width: 1px;
         height: 40px;
-        padding: 0 4px;
+        background: var(--fg-3);
+        opacity: 0.5;
+        animation: cue 2.6s ease-in-out infinite;
+        transform-origin: top;
+      }
+      @keyframes cue {
+        0%,
+        100% {
+          transform: scaleY(0.4);
+          opacity: 0.3;
+        }
+        50% {
+          transform: scaleY(1);
+          opacity: 0.65;
+        }
       }
 
-      .menu {
-        width: 22px;
+      /* ─── Page-section divider (hairline + green dot) ─── */
+      .why,
+      .demo-section,
+      .faq-section,
+      .closer {
+        position: relative;
+      }
+      .why::before,
+      .demo-section::before,
+      .faq-section::before,
+      .closer::before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 5px;
+        height: 5px;
+        border-radius: 50%;
+        background: var(--success);
+        box-shadow: 0 0 0 10px var(--bg-canvas);
+      }
+
+      /* ─── Why Justus ─── */
+      .why {
+        padding: 140px 0 80px;
+        border-top: 1px solid var(--border);
+        margin-top: 120px;
+      }
+      .section-head {
+        text-align: center;
+        margin-bottom: 88px;
+      }
+      .section-head .eyebrow {
+        font-size: 11px;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+        color: var(--fg-2);
+        margin-bottom: 16px;
+        font-weight: 500;
+      }
+      .section-head h2 {
+        font-family: var(--font-ui);
+        font-weight: 600;
+        font-size: 36px;
+        letter-spacing: -0.8px;
+        margin: 0 auto;
+        max-width: 620px;
+        line-height: 1.15;
+      }
+      .section-head h2 .italic {
+        font-family: var(--font-logo);
+        color: var(--success);
+        font-style: italic;
+        font-weight: 600;
+      }
+
+      .vs-list {
+        max-width: 760px;
+        margin: 0 auto;
+      }
+      .vs-item {
+        display: grid;
+        grid-template-columns: 56px 1fr;
+        gap: 32px;
+        padding: 56px 0 52px;
+      }
+      .vs-num {
+        font-family: var(--font-logo);
+        font-style: italic;
+        color: var(--success);
+        font-size: 24px;
+        line-height: 1;
+        padding-top: 12px;
+        font-weight: 600;
+        opacity: 0.6;
+      }
+      .vs-col {
+        min-width: 0;
+      }
+      .vs-title {
+        font-family: var(--font-ui);
+        font-size: 30px;
+        font-weight: 600;
+        letter-spacing: -0.6px;
+        color: var(--fg-1);
+        margin: 0 0 10px;
+        line-height: 1.15;
+      }
+      .vs-title .pre {
+        font-family: var(--font-logo);
+        font-style: italic;
+        font-weight: 500;
+        color: var(--fg-3);
+        margin-right: 4px;
+      }
+      .vs-who {
+        font-size: 14px;
+        color: var(--fg-2);
+        margin: 0 0 28px;
+        letter-spacing: 0.1px;
+      }
+      .vs-pull {
+        font-family: var(--font-logo);
+        font-style: italic;
+        color: var(--success);
+        font-size: 20px;
+        line-height: 1.45;
+        margin: 0 0 20px;
+        letter-spacing: -0.1px;
+        max-width: 580px;
+      }
+      .vs-p {
+        font-size: 16.5px;
+        line-height: 1.65;
+        color: var(--fg-2);
+        margin: 0;
+        max-width: 620px;
+      }
+      .vs-p strong {
+        color: var(--fg-1);
+        font-weight: 500;
+      }
+      .vs-p em {
+        color: var(--success);
+        font-style: italic;
+      }
+
+      /* ─── Demo ─── */
+      .demo-section {
+        padding: 120px 0 100px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      .demo-section .section-head {
+        margin-bottom: 56px;
+      }
+      .demo-stage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 28px;
+        position: relative;
+      }
+
+      /* Phone chassis — dark frame containing the light app screen */
+      .demo-phone {
+        width: 340px;
+        aspect-ratio: 9 / 19.5;
+        background: #14140f;
+        border-radius: 48px;
+        padding: 11px;
+        box-shadow: 0 40px 80px -24px rgba(20, 20, 15, 0.4),
+          0 12px 32px -8px rgba(20, 20, 15, 0.18),
+          inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+        position: relative;
+      }
+      .demo-phone::after {
+        content: '';
+        position: absolute;
+        inset: -32px;
+        background: radial-gradient(
+          ellipse at 50% 60%,
+          rgba(92, 138, 92, 0.12),
+          transparent 65%
+        );
+        z-index: -1;
+        filter: blur(40px);
+      }
+      .demo-phone-screen {
+        width: 100%;
+        height: 100%;
+        background: var(--bg-canvas);
+        border-radius: 38px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        padding: 52px 14px 14px;
+        color: var(--fg-1);
+      }
+      .demo-phone-screen::before {
+        content: '';
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 108px;
+        height: 30px;
+        background: #000;
+        border-radius: 999px;
+        z-index: 2;
+      }
+      .demo-caption {
+        font-size: 14px;
+        color: var(--fg-2);
+        max-width: 420px;
+        line-height: 1.55;
+        margin: 0;
+      }
+      .demo-caption em {
+        color: var(--success);
+        font-style: italic;
+      }
+
+      /* App mockup interior — matches the real Home screen */
+      .app-header {
+        display: grid;
+        grid-template-columns: 28px 1fr 28px;
+        align-items: center;
+        height: 36px;
+        padding: 0 4px;
+        margin-bottom: 8px;
+      }
+      .app-menu {
         display: flex;
         flex-direction: column;
         gap: 5px;
       }
-
-      .menu span {
+      .app-menu span {
         display: block;
-        width: 22px;
-        height: 2px;
-        background: var(--app-text-secondary);
+        width: 20px;
+        height: 1.5px;
+        background: var(--fg-2);
         border-radius: 1px;
       }
-
-      .phone-title {
+      .app-title {
         text-align: center;
-        font-size: 16px;
+        font-size: 15px;
         font-weight: 600;
-        color: var(--app-text-primary);
-        letter-spacing: -0.01em;
+        color: var(--fg-1);
       }
-
-      /* Content */
-      .phone-content {
-        padding: 12px 4px 0;
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        min-height: 0;
-      }
-
       .section-label {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 500;
         letter-spacing: 0.5px;
         text-transform: uppercase;
-        color: var(--app-text-secondary);
-        margin: 0 0 8px 4px;
+        color: var(--fg-2);
+        margin: 0 0 6px 4px;
       }
-
-      .card + .section-label {
-        margin-top: 16px;
+      .app-card + .section-label {
+        margin-top: 14px;
       }
-
-      .card {
-        background: var(--app-surface);
-        border-radius: 18px;
-        padding: 14px;
+      .app-card {
+        background: var(--surface);
+        border-radius: 16px;
+        padding: 12px;
       }
-
-      /* Today card */
       .today-header {
         display: flex;
         align-items: center;
-        gap: 12px;
-        margin-bottom: 14px;
+        gap: 10px;
+        margin-bottom: 12px;
       }
-
       .icon-tile {
-        width: 44px;
-        height: 44px;
-        border-radius: 11px;
-        background: var(--app-surface-accent);
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        background: var(--surface-accent);
         display: grid;
         place-items: center;
         flex-shrink: 0;
-        color: var(--app-text-primary);
-        font-size: 20px;
+        color: var(--fg-1);
+        font-size: 17px;
       }
-
       .icon-tile.sm {
-        width: 40px;
-        height: 40px;
-        border-radius: 10px;
-        font-size: 18px;
+        width: 34px;
+        height: 34px;
+        border-radius: 9px;
+        font-size: 15px;
       }
-
       .today-title {
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 600;
         line-height: 1.25;
         margin: 0;
       }
-
       .stats-grid {
         display: grid;
         grid-template-columns: 1fr 1fr;
         gap: 8px;
       }
-
       .stat-label {
-        font-size: 11px;
+        font-size: 10px;
         font-weight: 500;
         letter-spacing: 0.3px;
         text-transform: uppercase;
-        color: var(--app-text-tertiary);
+        color: var(--fg-3);
         margin: 0 0 2px;
       }
-
       .stat-value {
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 600;
         margin: 0;
-        color: var(--app-text-primary);
+        color: var(--fg-1);
       }
-
-      /* Coming up rows */
       .coming-row {
         display: flex;
         align-items: center;
-        gap: 12px;
+        gap: 10px;
       }
-
       .coming-row + .coming-row {
-        margin-top: 12px;
-        padding-top: 12px;
-        border-top: 1px solid var(--app-border);
+        margin-top: 10px;
+        padding-top: 10px;
+        border-top: 1px solid var(--border);
       }
-
       .coming-title {
-        font-size: 15px;
+        font-size: 12.5px;
         font-weight: 600;
         margin: 0 0 2px;
       }
-
       .coming-meta {
-        font-size: 12px;
-        color: var(--app-text-tertiary);
+        font-size: 10.5px;
+        color: var(--fg-3);
         margin: 0;
       }
-
-      /* Coach bubble — matches coachQuestionContainer */
       .coach-bubble {
-        background: var(--app-surface-accent);
-        border: 1px solid var(--app-border);
-        border-radius: 16px;
-        padding: 14px;
-        font-size: 13px;
+        background: var(--surface-accent);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 11px;
+        font-size: 11.5px;
         line-height: 1.5;
-        color: var(--app-text-primary);
+        color: var(--fg-1);
       }
-
-      /* Input bar — glass */
       .input-bar {
-        margin: 12px 0 0;
+        margin-top: auto;
         background: rgba(255, 255, 255, 0.85);
         border: 1px solid rgba(0, 0, 0, 0.08);
-        border-radius: 24px;
-        padding: 8px 8px 8px 16px;
+        border-radius: 22px;
+        padding: 6px 6px 6px 14px;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        min-height: 44px;
-        font-size: 14px;
-        color: var(--app-text-tertiary);
+        min-height: 38px;
+        font-size: 12px;
+        color: var(--fg-3);
       }
-
       .mic {
-        width: 32px;
-        height: 32px;
+        width: 28px;
+        height: 28px;
         border-radius: 50%;
-        background: rgba(26, 26, 26, 0.10);
+        background: rgba(26, 26, 26, 0.1);
         display: grid;
         place-items: center;
-        color: var(--app-text-primary);
-        font-size: 14px;
+        color: var(--fg-1);
+        font-size: 11px;
       }
 
-      /* Tablet & smaller: stack the hero, keep content readable */
-      @media (max-width: 960px) {
+      /* ─── FAQ ─── */
+      .faq-section {
+        padding: 100px 0 100px;
+        border-top: 1px solid var(--border);
+      }
+      .faq-section .section-head {
+        margin-bottom: 56px;
+      }
+      .faq-list {
+        max-width: 720px;
+        margin: 0 auto;
+        border-top: 1px solid var(--border);
+      }
+      .faq-item {
+        border-bottom: 1px solid var(--border);
+      }
+      .faq-q {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 24px;
+        width: 100%;
+        background: transparent;
+        border: 0;
+        padding: 26px 4px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 17px;
+        font-weight: 500;
+        color: var(--fg-1);
+        text-align: left;
+        letter-spacing: -0.1px;
+        transition: color 140ms ease;
+        list-style: none;
+      }
+      .faq-q::-webkit-details-marker {
+        display: none;
+      }
+      .faq-q:hover {
+        color: var(--success);
+      }
+      .faq-icon {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        flex-shrink: 0;
+        color: var(--fg-2);
+      }
+      .faq-icon::before,
+      .faq-icon::after {
+        content: '';
+        position: absolute;
+        background: currentColor;
+        transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 200ms ease;
+      }
+      .faq-icon::before {
+        top: 8px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+      }
+      .faq-icon::after {
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 1.5px;
+      }
+      .faq-item[open] .faq-icon::after {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+      .faq-item[open] .faq-icon {
+        color: var(--success);
+      }
+      .faq-item[open] .faq-q {
+        color: var(--success);
+      }
+      .faq-a-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows 320ms cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .faq-item[open] .faq-a-wrap {
+        grid-template-rows: 1fr;
+      }
+      .faq-a-inner {
+        overflow: hidden;
+      }
+      .faq-a {
+        padding: 0 4px 28px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--fg-2);
+        max-width: 560px;
+      }
+      .faq-a p {
+        margin: 0 0 12px;
+      }
+      .faq-a p:last-child {
+        margin: 0;
+      }
+      .faq-a em {
+        color: var(--success);
+        font-style: italic;
+      }
+
+      /* ─── Closing CTA ─── */
+      .closer {
+        text-align: center;
+        padding: 140px 0 80px;
+        border-top: 1px solid var(--border);
+      }
+      .closer .word-small {
+        font-family: var(--font-logo);
+        font-weight: var(--fw-semibold);
+        color: var(--success);
+        font-size: 64px;
+        letter-spacing: -0.7px;
+        line-height: 1;
+      }
+      .closer .word-small .dot {
+        color: var(--fg-1);
+      }
+      .closer .tag {
+        margin-top: 16px;
+        font-style: italic;
+        color: var(--fg-2);
+        font-size: 17px;
+      }
+      .closer .form {
+        margin: 36px auto 18px;
+        max-width: 440px;
+      }
+
+      /* Footer */
+      footer.site-footer {
+        padding: 40px 0 56px;
+        border-top: 1px solid var(--border);
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        font-size: 12px;
+        color: var(--fg-3);
+        letter-spacing: 0.3px;
+      }
+      footer.site-footer a {
+        color: var(--fg-3);
+        text-decoration: none;
+        margin-left: 18px;
+      }
+      footer.site-footer a:hover {
+        color: var(--fg-1);
+      }
+
+      /* ─── Responsive ─── */
+      @media (max-width: 880px) {
+        .shell {
+          padding: 0 28px;
+        }
         .hero {
-          width: auto;
-          max-width: 720px;
-          margin: 32px auto;
-          padding: 0 24px 32px;
+          padding: 64px 0 56px;
         }
-        .hero-headline {
-          white-space: normal;
-          font-size: clamp(32px, 6vw, 48px);
-          text-wrap: balance;
+        .hero .word {
+          font-size: 96px;
         }
-        .hero-body {
+        .essay {
+          margin: 56px auto 48px;
+        }
+        .why {
+          padding: 96px 0 24px;
+          margin-top: 80px;
+        }
+        .faq-section {
+          padding: 64px 0 80px;
+        }
+        .section-head {
+          margin-bottom: 56px;
+        }
+        .section-head h2 {
+          font-size: 28px;
+        }
+        .vs-item {
+          grid-template-columns: 32px 1fr;
+          gap: 16px;
+          padding: 40px 0;
+        }
+        .vs-num {
+          font-size: 20px;
+          padding-top: 9px;
+        }
+        .vs-title {
+          font-size: 24px;
+          letter-spacing: -0.4px;
+        }
+        .vs-pull {
+          font-size: 18px;
+        }
+        .vs-p {
+          font-size: 16px;
+        }
+        .demo-section {
+          padding: 80px 0 64px;
+        }
+        .demo-phone {
+          width: 280px;
+          border-radius: 38px;
+          padding: 9px;
+        }
+        .demo-phone-screen {
+          border-radius: 30px;
+          padding: 44px 12px 12px;
+        }
+        .closer {
+          padding: 96px 0 56px;
+        }
+        .closer .word-small {
+          font-size: 48px;
+        }
+        footer.site-footer {
           flex-direction: column;
-          align-items: stretch;
-          gap: 40px;
-        }
-        .copy {
-          width: 100%;
-        }
-        .waitlist-card {
-          max-width: none;
-        }
-        .phone-wrap {
-          width: 320px;
-          align-self: center;
-          order: 2; /* phone goes below the content on small screens */
-        }
-        .phone {
-          width: 100%;
+          gap: 12px;
+          align-items: flex-start;
         }
       }
-
-      /* Phones: hide the phone mockup, focus on the waitlist */
       @media (max-width: 520px) {
-        .hero {
-          margin: 24px auto;
-          padding: 0 20px 24px;
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
         }
-        .hero-headline {
-          font-size: clamp(28px, 8vw, 40px);
-          margin-bottom: 20px;
+        .hero .word {
+          font-size: 72px;
         }
-        .hero-body {
-          gap: 28px;
+        .form {
+          padding: 5px 5px 5px 18px;
         }
-        .waitlist-card {
-          padding: 18px;
-          border-radius: 16px;
-        }
-        .phone-wrap {
-          display: none;
+        .form input {
+          font-size: 15px;
         }
       }
     </style>
   </head>
   <body>
-    <section class="hero">
-      <h1 class="hero-headline"><span class="brand-text">Justus:</span> your private AI fitness coach.</h1>
-      <div class="hero-body">
-      <div class="copy">
+    <main class="shell">
+      <nav class="nav">
+        <span class="mark">Justus</span>
+        <div class="right">
+          <a href="#why">Why Justus</a>
+          <a href="#demo">Demo</a>
+          <a href="#faq">FAQ</a>
+          <span class="stamp">Research preview · 2026</span>
+        </div>
+      </nav>
+
+      <!-- ────────── Hero ────────── -->
+      <section class="hero">
+        <div class="word">Justus<span class="dot">.</span></div>
         <p class="sub">
-          <i>Justus</i> plans your workouts, adapts to your life, and remembers
-          everything, privately. No leaderboards, comparisons, or social
-          pressure.
+          <em>Your private AI fitness coach.</em>
         </p>
+      </section>
 
-        <ul class="features">
-          <li>
-            Plans across all kinds of fitness, from running and strength to
-            biking, HIIT, swimming, and yoga.
-          </li>
-          <li>Adjusts when life gets in the way (injury, travel, off-weeks).</li>
-          <li>
-            Builds a real understanding of you over time, not just your last
-            workout.
-          </li>
-          <li>
-            Conversation is the interface, just like a human coach. No walls of
-            data to interpret.
-          </li>
-        </ul>
+      <div class="essay">
+        <p>
+          Most fitness apps are built for the wrong moment: the one where
+          you're already winning. They reward streaks, post numbers to feeds,
+          and quietly punish the weeks that life took from you.
+        </p>
+        <p class="quiet">
+          Justus is the opposite of that. A coach who knows the science, learns
+          your history, and is patient through the ups and downs. You connect
+          your data and talk; Justus listens, adjusts, and remembers across
+          years, not sessions.
+        </p>
+        <p>
+          No leaderboards. No streaks. No walls of data.
+          <span class="green">Zero social features. Just us.</span>
+        </p>
+      </div>
 
-        <!--
-          LaunchList integration:
-          1. Replace the form `action` below with your LaunchList endpoint
-             (e.g. https://getlaunchlist.com/s/XXXXXX) once your account is set up.
-          2. The widget-diy.js script in <head> handles referral tracking automatically.
-          3. Field names (`name`, `email`, `exercise_types`) are captured as-is.
-        -->
-        <div class="waitlist-card">
-          <h2 class="card-title">Join the waitlist</h2>
-          <p class="card-sub">
-            Get early access when the research preview goes live.
-          </p>
+      <hr class="rule" />
 
-          <form
-            id="waitlist"
-            class="launchlist-form"
-            action="https://getlaunchlist.com/s/VfMDfO"
-            method="post"
-            novalidate
-          >
-            <div class="field">
-              <label for="wl-email">Email <span class="req" aria-hidden="true">*</span></label>
-              <input
-                id="wl-email"
-                type="email"
-                name="email"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required
-                aria-required="true"
-                aria-describedby="wl-email-error"
-              />
-              <p id="wl-email-error" class="field-error" role="alert"></p>
-            </div>
+      <section class="cta" id="get-early-access">
+        <div class="eyebrow">Waitlist</div>
+        <h2>Get early access</h2>
+        <div class="cta-sub">
+          A small, slow rollout when the research preview goes live.
+        </div>
+        <form
+          class="form launchlist-form waitlist-form"
+          action="https://getlaunchlist.com/s/VfMDfO"
+          method="post"
+          data-form-location="hero"
+          novalidate
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          />
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="referrer" />
+          <button type="submit">Join</button>
+        </form>
+        <p class="form-error" data-form-error></p>
+      </section>
 
-            <div class="field">
-              <label for="wl-name">Name</label>
-              <input
-                id="wl-name"
-                type="text"
-                name="name"
-                placeholder="Your name"
-                autocomplete="name"
-              />
-            </div>
+      <div class="scroll-cue" aria-hidden="true">
+        <span>More below</span>
+        <span class="line"></span>
+      </div>
 
-            <input type="hidden" name="exercise_types" id="exercise-types-hidden" />
-
-            <fieldset>
-              <legend class="fieldset-label">What kinds of fitness are you into?</legend>
-              <div class="pill-group">
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Running" />Running</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Strength" />Strength</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Cycling" />Cycling</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="HIIT" />HIIT</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="CrossFit" />CrossFit</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Swimming" />Swimming</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Rowing" />Rowing</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Yoga" />Yoga</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Triathlon" />Triathlon</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Sports" />Sports</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Nothing Yet" />Nothing yet</label>
-                <label class="pill"><input type="checkbox" class="exercise-type" value="Other" />Other</label>
-              </div>
-            </fieldset>
-
-            <button type="submit">Join the waitlist</button>
-          </form>
+      <!-- ────────── Why Justus ────────── -->
+      <section class="why" id="why">
+        <div class="section-head">
+          <div class="eyebrow">Why Justus</div>
+          <h2>
+            A coach, not a <span class="italic">dashboard</span> &mdash; and not
+            <span class="italic">a stranger</span>.
+          </h2>
         </div>
 
-        <script>
-          (function () {
-            var form = document.getElementById('waitlist');
-            if (!form) return;
-            var emailInput = document.getElementById('wl-email');
-            var emailError = document.getElementById('wl-email-error');
+        <div class="vs-list">
+          <article class="vs-item">
+            <div class="vs-num">i.</div>
+            <div class="vs-col">
+              <h3 class="vs-title">
+                <span class="pre">vs</span>The data trackers
+              </h3>
+              <p class="vs-who">
+                Garmin · Apple Health · Fitbit · Suunto · Coros · Polar
+              </p>
+              <p class="vs-pull">They measure beautifully. They don't plan.</p>
+              <p class="vs-p">
+                Heart rate zones, splits, training load, sleep stages, recovery
+                scores; the wearables ecosystem is extraordinary at telling you
+                what happened. The few that try to plan (Garmin Coach, the new
+                Google Health Coach) are tied to their own watches, built as
+                features on top of a data dashboard, and run by companies whose
+                business <em>is</em> your data.
+                <strong>Justus is a coach first</strong>: the plan leads, the
+                data supports, and your watch doesn't matter.
+              </p>
+            </div>
+          </article>
 
-            function clearError() {
-              emailInput.classList.remove('invalid');
-              emailError.textContent = '';
+          <article class="vs-item">
+            <div class="vs-num">ii.</div>
+            <div class="vs-col">
+              <h3 class="vs-title">
+                <span class="pre">vs</span>General chatbots
+              </h3>
+              <p class="vs-who">Claude · ChatGPT · Gemini</p>
+              <p class="vs-pull">Brilliant, but a stranger every time.</p>
+              <p class="vs-p">
+                General-purpose AI is powerful, but you have to re-explain your
+                situation, paste data, upload screenshots, and remember to come
+                back. It can't see Tuesday's workout unless you tell it. It
+                can't write the plan you log against, and it can't follow up.
+                <strong
+                  >Justus holds a durable profile across years</strong
+                >, maintains an actual plan, and reaches out when it should,
+                not just when you remember to ask.
+              </p>
+            </div>
+          </article>
+
+          <article class="vs-item">
+            <div class="vs-num">iii.</div>
+            <div class="vs-col">
+              <h3 class="vs-title"><span class="pre">vs</span>Runna</h3>
+              <p class="vs-who">The running-first training app</p>
+              <p class="vs-pull">
+                Excellent for one race. Less so for the rest of your life.
+              </p>
+              <p class="vs-p">
+                Runna is the best running-first app on the market. Its plans
+                are template-driven by elite coaches and adjust pace targets as
+                you progress. But the strength work is supplementary, the
+                adaptation is mostly pace-based, and it doesn't really know
+                about your sleep, your travel week, or the lift you did
+                yesterday. <strong>Justus is broader and conversational</strong>:
+                tell it about a sore knee or a missed week and the plan
+                reshapes around you, across every modality you train.
+              </p>
+            </div>
+          </article>
+
+          <article class="vs-item">
+            <div class="vs-num">iv.</div>
+            <div class="vs-col">
+              <h3 class="vs-title">
+                <span class="pre">vs</span>The strength loggers
+              </h3>
+              <p class="vs-who">Fitbod · Strong · Hevy</p>
+              <p class="vs-pull">Great progression. Stops at the gym door.</p>
+              <p class="vs-p">
+                These have some of the best strength logging and progression in
+                the category. They also can't see your sleep, your HRV, the run
+                you did this morning, or whether you're heading into a deload.
+                And they're strength-only by design, so if you also run, cycle,
+                or swim, you're juggling apps.
+                <strong
+                  >Justus programs strength alongside every other
+                  modality</strong
+                >, and reads the recovery signals the loggers can't see.
+              </p>
+            </div>
+          </article>
+
+          <article class="vs-item">
+            <div class="vs-num">v.</div>
+            <div class="vs-col">
+              <h3 class="vs-title">
+                <span class="pre">vs</span>The recovery wearables
+              </h3>
+              <p class="vs-who">Whoop · Oura · Fitbit Air</p>
+              <p class="vs-pull">A complement, not a competitor.</p>
+              <p class="vs-p">
+                These read your body (sleep, HRV, readiness) better than
+                anything. What they don't do is build or log workouts.
+                <strong>Pair one with Justus</strong> and the recovery data
+                flows into a coach that can act on it: lighten today's session,
+                push tomorrow's intervals, hold the deload when your body is
+                asking for it.
+              </p>
+            </div>
+          </article>
+
+          <article class="vs-item">
+            <div class="vs-num">vi.</div>
+            <div class="vs-col">
+              <h3 class="vs-title">
+                <span class="pre">vs</span>Everything else
+              </h3>
+              <p class="vs-who">The default fitness-app experience</p>
+              <p class="vs-pull">Truly AI-native. Quiet by design.</p>
+              <p class="vs-p">
+                A conversation, not a form. One coach across every surface,
+                with shared context. No gym-bro themes, no "perfect" bodies, no
+                walls of unexplained numbers, no leaderboards, no feeds, no
+                friend requests.
+              </p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ────────── Demo ────────── -->
+      <section class="demo-section" id="demo">
+        <div class="section-head">
+          <div class="eyebrow">A look inside</div>
+          <h2>What Justus <span class="italic">feels like</span>.</h2>
+        </div>
+
+        <div class="demo-stage">
+          <div class="demo-phone" aria-label="App preview">
+            <div class="demo-phone-screen">
+              <div class="app-header">
+                <div class="app-menu" aria-hidden="true">
+                  <span></span><span></span><span></span>
+                </div>
+                <div class="app-title">Justus</div>
+                <span></span>
+              </div>
+
+              <p class="section-label">Today</p>
+              <div class="app-card">
+                <div class="today-header">
+                  <div class="icon-tile" aria-hidden="true">
+                    <i class="fa-solid fa-person-running"></i>
+                  </div>
+                  <h3 class="today-title">Easy Aerobic Run</h3>
+                </div>
+                <div class="stats-grid">
+                  <div>
+                    <p class="stat-label">Scheduled for</p>
+                    <p class="stat-value">Afternoon</p>
+                  </div>
+                  <div>
+                    <p class="stat-label">Duration</p>
+                    <p class="stat-value">34 min</p>
+                  </div>
+                </div>
+              </div>
+
+              <p class="section-label">Coming up</p>
+              <div class="app-card">
+                <div class="coming-row">
+                  <div class="icon-tile sm" aria-hidden="true">
+                    <i class="fa-solid fa-person-swimming"></i>
+                  </div>
+                  <div>
+                    <p class="coming-title">Aerobic Base Swim</p>
+                    <p class="coming-meta">Friday · Afternoon · 39 min · 1300 yd</p>
+                  </div>
+                </div>
+                <div class="coming-row">
+                  <div class="icon-tile sm" aria-hidden="true">
+                    <i class="fa-solid fa-spa"></i>
+                  </div>
+                  <div>
+                    <p class="coming-title">Weekend Stretch</p>
+                    <p class="coming-meta">Sunday · Morning · 26 min</p>
+                  </div>
+                </div>
+              </div>
+
+              <p class="section-label">Justus</p>
+              <div class="coach-bubble">
+                Easy Aerobic Run is on the plan for today: 34 minutes with a
+                107 to 128 bpm aerobic target and effort level 5 out of 10.
+                Want to keep it as planned, or trim it into a lighter movement
+                day?
+              </div>
+
+              <div class="input-bar">
+                <span>Reply to Justus</span>
+                <span class="mic" aria-hidden="true">
+                  <i class="fa-solid fa-microphone"></i>
+                </span>
+              </div>
+            </div>
+          </div>
+          <p class="demo-caption">Video demo coming soon.</p>
+        </div>
+      </section>
+
+      <!-- ────────── FAQ ────────── -->
+      <section class="faq-section" id="faq">
+        <div class="section-head">
+          <div class="eyebrow">Frequently asked</div>
+          <h2>A few <span class="italic">things worth knowing</span>.</h2>
+        </div>
+
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-q">
+              <span>What types of training are supported?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a-wrap">
+              <div class="faq-a-inner">
+                <div class="faq-a">
+                  <p>
+                    Running, strength, cycling, swimming, HIIT, mobility, yoga,
+                    rowing, triathlon, and hybrid combinations of any of these.
+                    Justus programs across modalities in a single coordinated
+                    plan. Your long run won't land the day after a heavy
+                    lower-body session unless you want it to.
+                  </p>
+                  <p>
+                    Whether you're picking up weights for the first time or
+                    training for your 25th marathon, Justus is trained on the
+                    relevant literature.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>Is my data really private?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a-wrap">
+              <div class="faq-a-inner">
+                <div class="faq-a">
+                  <p>
+                    Yes. No social features, no feeds, no leaderboards. Your
+                    training is between you and your coach. We don't sell your
+                    data and we don't share it with advertisers. You can export
+                    or delete everything at any time. <em>Just us.</em>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>Do I need a wearable or specific gear?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a-wrap">
+              <div class="faq-a-inner">
+                <div class="faq-a">
+                  <p>
+                    No. Justus works from a conversation. If you have an Apple
+                    Watch, Garmin, Whoop, Oura, or any device that talks to
+                    HealthKit or Health Connect, great. That data flows in and
+                    shapes your plan. If you don't, Justus will ask the right
+                    questions and plan from there.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span
+                >When does the research preview start, and what does it
+                cost?</span
+              >
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a-wrap">
+              <div class="faq-a-inner">
+                <div class="faq-a">
+                  <p>
+                    We're opening access in small waves through 2026. Pricing
+                    isn't final, but the research preview will be low-cost for
+                    early users while we refine what a private AI coach should
+                    feel like.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+
+          <details class="faq-item">
+            <summary class="faq-q">
+              <span>What happens after I join the waitlist?</span>
+              <span class="faq-icon" aria-hidden="true"></span>
+            </summary>
+            <div class="faq-a-wrap">
+              <div class="faq-a-inner">
+                <div class="faq-a">
+                  <p>
+                    You get a personal referral link you can share. Referrals
+                    move you up the waitlist; the more friends you bring along,
+                    the sooner you get in.
+                  </p>
+                  <p>
+                    We'll only write when there's something real to say, and
+                    when your spot is ready.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </details>
+        </div>
+      </section>
+
+      <!-- ────────── Closing CTA ────────── -->
+      <section class="closer">
+        <div class="word-small">Justus<span class="dot">.</span></div>
+        <div class="tag">Your journey, your pace.</div>
+        <form
+          class="form launchlist-form waitlist-form"
+          action="https://getlaunchlist.com/s/VfMDfO"
+          method="post"
+          data-form-location="closer"
+          novalidate
+        >
+          <input
+            type="email"
+            name="email"
+            placeholder="your@email.com"
+            required
+            autocomplete="email"
+            aria-label="Email address"
+          />
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="referrer" />
+          <button type="submit">Join the waitlist</button>
+        </form>
+        <p class="form-error" data-form-error></p>
+      </section>
+
+      <footer class="site-footer">
+        <span>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+          <a href="mailto:hello@justus.health">hello@justus.health</a>
+        </span>
+      </footer>
+    </main>
+
+    <script>
+      // ─── UTM passthrough: copy URL params into hidden form fields ───
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var keys = [
+          'utm_source',
+          'utm_medium',
+          'utm_campaign',
+          'utm_content',
+          'utm_term',
+        ];
+        document.querySelectorAll('form.waitlist-form').forEach(function (form) {
+          keys.forEach(function (key) {
+            var input = form.querySelector('input[name="' + key + '"]');
+            if (input) input.value = params.get(key) || '';
+          });
+          var ref = form.querySelector('input[name="referrer"]');
+          if (ref) ref.value = document.referrer || '';
+        });
+      })();
+
+      // ─── Form validation + PostHog tracking ───
+      (function () {
+        document.querySelectorAll('form.waitlist-form').forEach(function (form) {
+          var emailInput = form.querySelector('input[type="email"]');
+          var errorEl = form.parentElement.querySelector('[data-form-error]');
+
+          function clearError() {
+            form.classList.remove('invalid');
+            if (errorEl) errorEl.textContent = '';
+          }
+          function showError(msg) {
+            form.classList.add('invalid');
+            if (errorEl) errorEl.textContent = msg;
+          }
+
+          emailInput.addEventListener('input', clearError);
+
+          form.addEventListener('submit', function (event) {
+            var value = emailInput.value.trim();
+            if (!value) {
+              event.preventDefault();
+              showError('Please enter your email so we can reach you.');
+              emailInput.focus();
+              return;
             }
-
-            function showError(message) {
-              emailInput.classList.add('invalid');
-              emailError.textContent = message;
+            if (!emailInput.checkValidity()) {
+              event.preventDefault();
+              showError('That email doesn’t look right. Mind double-checking?');
+              emailInput.focus();
+              return;
             }
+            clearError();
 
-            emailInput.addEventListener('input', clearError);
-
-            form.addEventListener('submit', function (event) {
-              var value = emailInput.value.trim();
-              if (!value) {
-                event.preventDefault();
-                showError('Please enter your email so we can reach you.');
-                emailInput.focus();
-                return;
+            // PostHog: identify by email and capture conversion event.
+            // UTMs are auto-captured by PostHog from the URL, but we send
+            // them again as event properties for explicit funnel filtering.
+            try {
+              if (window.posthog) {
+                window.posthog.identify(value, { email: value });
+                var params = new URLSearchParams(window.location.search);
+                window.posthog.capture('waitlist_submitted', {
+                  form_location: form.dataset.formLocation || 'unknown',
+                  utm_source: params.get('utm_source') || null,
+                  utm_medium: params.get('utm_medium') || null,
+                  utm_campaign: params.get('utm_campaign') || null,
+                  utm_content: params.get('utm_content') || null,
+                  utm_term: params.get('utm_term') || null,
+                });
               }
-              if (!emailInput.checkValidity()) {
-                event.preventDefault();
-                showError('That email doesn’t look right. Mind double-checking?');
-                emailInput.focus();
-                return;
-              }
-              clearError();
+            } catch (e) {
+              // Never block submission on a tracking failure.
+            }
+          });
+        });
+      })();
 
-              // Roll up the pill checkboxes into a single comma-separated
-              // value, since LaunchList only stores one value per field.
-              var checked = form.querySelectorAll('.exercise-type:checked');
-              var values = Array.prototype.map.call(checked, function (el) {
-                return el.value;
-              }).join(', ');
-              document.getElementById('exercise-types-hidden').value = values;
+      // ─── FAQ: only one open at a time ───
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        item.addEventListener('toggle', function () {
+          if (item.open) {
+            document.querySelectorAll('.faq-item').forEach(function (other) {
+              if (other !== item) other.open = false;
             });
-          })();
-        </script>
-      </div>
+          }
+        });
+      });
 
-      <div class="phone-wrap" aria-hidden="true">
-        <div class="phone">
-          <div class="phone-header">
-            <div class="menu" aria-hidden="true">
-              <span></span><span></span><span></span>
-            </div>
-            <div class="phone-title">Justus</div>
-            <span></span>
-          </div>
-
-          <div class="phone-content">
-            <p class="section-label">Today</p>
-            <div class="card">
-              <div class="today-header">
-                <div class="icon-tile">
-                  <i class="fa-solid fa-person-running"></i>
-                </div>
-                <h3 class="today-title">Easy Aerobic Run</h3>
-              </div>
-              <div class="stats-grid">
-                <div>
-                  <p class="stat-label">Scheduled for</p>
-                  <p class="stat-value">Afternoon</p>
-                </div>
-                <div>
-                  <p class="stat-label">Duration</p>
-                  <p class="stat-value">34 min</p>
-                </div>
-              </div>
-            </div>
-
-            <p class="section-label">Coming up</p>
-            <div class="card">
-              <div class="coming-row">
-                <div class="icon-tile sm">
-                  <i class="fa-solid fa-person-swimming"></i>
-                </div>
-                <div>
-                  <p class="coming-title">Aerobic Base Swim</p>
-                  <p class="coming-meta">Friday · Afternoon · 39 min · 1300 yd</p>
-                </div>
-              </div>
-              <div class="coming-row">
-                <div class="icon-tile sm">
-                  <i class="fa-solid fa-spa"></i>
-                </div>
-                <div>
-                  <p class="coming-title">Weekend Stretch</p>
-                  <p class="coming-meta">Sunday · Morning · 26 min</p>
-                </div>
-              </div>
-            </div>
-
-            <p class="section-label">Justus</p>
-            <div class="coach-bubble">
-              Easy Aerobic Run is on the plan for today: 34 minutes with a 107 to
-              128 bpm aerobic target and effort level 5 out of 10. Want to keep
-              it as planned, or trim it into a lighter movement day?
-            </div>
-
-            <div class="input-bar">
-              <span>Reply to Justus</span>
-              <span class="mic" aria-hidden="true">
-                <i class="fa-solid fa-microphone"></i>
-              </span>
-            </div>
-          </div>
-        </div>
-      </div>
-      </div>
-    </section>
-
-    <footer class="site-footer">
-      <a href="/privacy/">Privacy</a>
-      <span aria-hidden="true">·</span>
-      <a href="/terms/">Terms</a>
-    </footer>
+      // ─── Smooth-scroll for in-page anchors ───
+      document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          var id = a.getAttribute('href').slice(1);
+          var el = document.getElementById(id);
+          if (el) {
+            e.preventDefault();
+            window.scrollTo({ top: el.offsetTop - 24, behavior: 'smooth' });
+          }
+        });
+      });
+    </script>
   </body>
 </html>
