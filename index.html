@@ -74,12 +74,29 @@
         padding: 0 64px;
       }
 
-      /* ─── Top nav ─── */
+      /* ─── Top nav (sticky) ─── */
       .nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(250, 249, 247, 0.85);
+        backdrop-filter: blur(20px) saturate(140%);
+        -webkit-backdrop-filter: blur(20px) saturate(140%);
+        border-bottom: 1px solid transparent;
+        transition: border-color 200ms ease;
+      }
+      .nav.is-scrolled {
+        border-bottom-color: var(--border);
+      }
+      .nav-inner {
         display: flex;
         justify-content: space-between;
         align-items: baseline;
-        padding: 40px 0 0;
+        gap: 16px 28px;
+        padding: 20px 64px;
+        max-width: 1120px;
+        margin: 0 auto;
+        flex-wrap: wrap;
       }
       .nav .mark {
         font-family: var(--font-logo);
@@ -88,24 +105,25 @@
         font-size: 24px;
         letter-spacing: var(--tracking-logo-s);
       }
-      .nav .right {
+      .nav-links {
         display: flex;
         align-items: baseline;
         gap: 28px;
         font-size: 13px;
         color: var(--fg-2);
       }
-      .nav .right a {
+      .nav-links a {
         color: var(--fg-2);
         text-decoration: none;
         transition: color 120ms ease;
       }
-      .nav .right a:hover {
+      .nav-links a:hover {
         color: var(--fg-1);
       }
-      .nav .right .stamp {
+      .nav .stamp {
         font-style: italic;
         color: var(--fg-3);
+        font-size: 13px;
       }
 
       /* ─── Hero ─── */
@@ -354,10 +372,65 @@
         margin: 0 auto;
       }
       .vs-item {
+        padding: 0;
+      }
+      .vs-summary {
         display: grid;
-        grid-template-columns: 56px 1fr;
+        grid-template-columns: 56px 1fr 24px;
         gap: 32px;
-        padding: 56px 0 52px;
+        padding: 40px 0 36px;
+        cursor: pointer;
+        list-style: none;
+        align-items: start;
+      }
+      .vs-summary::-webkit-details-marker {
+        display: none;
+      }
+      .vs-summary:hover .vs-title {
+        color: var(--success);
+      }
+      .vs-title {
+        transition: color 140ms ease;
+      }
+      .vs-toggle {
+        width: 18px;
+        height: 18px;
+        position: relative;
+        color: var(--fg-3);
+        margin-top: 18px;
+      }
+      .vs-toggle::before,
+      .vs-toggle::after {
+        content: '';
+        position: absolute;
+        background: currentColor;
+        transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+          opacity 200ms ease;
+      }
+      .vs-toggle::before {
+        top: 8px;
+        left: 0;
+        right: 0;
+        height: 1.5px;
+      }
+      .vs-toggle::after {
+        left: 8px;
+        top: 0;
+        bottom: 0;
+        width: 1.5px;
+      }
+      .vs-item[open] .vs-toggle::after {
+        transform: rotate(90deg);
+        opacity: 0;
+      }
+      .vs-item[open] .vs-toggle {
+        color: var(--success);
+      }
+      .vs-body {
+        display: grid;
+        grid-template-columns: 56px 1fr 24px;
+        gap: 32px;
+        padding: 0 0 36px;
       }
       .vs-num {
         font-family: var(--font-logo);
@@ -823,10 +896,18 @@
         .section-head h2 {
           font-size: 28px;
         }
-        .vs-item {
-          grid-template-columns: 32px 1fr;
+        .vs-summary,
+        .vs-body {
+          grid-template-columns: 32px 1fr 18px;
           gap: 16px;
-          padding: 40px 0;
+          padding: 32px 0 28px;
+        }
+        .vs-body {
+          padding-top: 0;
+          padding-bottom: 28px;
+        }
+        .vs-toggle {
+          margin-top: 14px;
         }
         .vs-num {
           font-size: 20px;
@@ -866,11 +947,23 @@
           align-items: flex-start;
         }
       }
+      @media (max-width: 880px) {
+        .nav-inner {
+          padding: 16px 28px;
+        }
+      }
       @media (max-width: 520px) {
-        .nav {
-          flex-direction: column;
-          align-items: flex-start;
-          gap: 12px;
+        .nav-inner {
+          padding: 14px 24px;
+          row-gap: 8px;
+        }
+        .nav-links {
+          order: 2;
+          width: 100%;
+          gap: 22px;
+        }
+        .nav .stamp {
+          font-size: 12px;
         }
         .hero .word {
           font-size: 72px;
@@ -885,16 +978,19 @@
     </style>
   </head>
   <body>
-    <main class="shell">
-      <nav class="nav">
+    <nav class="nav" id="site-nav">
+      <div class="nav-inner">
         <span class="mark">Justus</span>
-        <div class="right">
+        <span class="stamp">Research preview · 2026</span>
+        <div class="nav-links">
           <a href="#why">Why Justus</a>
           <a href="#demo">Demo</a>
           <a href="#faq">FAQ</a>
-          <span class="stamp">Research preview · 2026</span>
         </div>
-      </nav>
+      </div>
+    </nav>
+
+    <main class="shell">
 
       <!-- ────────── Hero ────────── -->
       <section class="hero">
@@ -972,16 +1068,22 @@
         </div>
 
         <div class="vs-list">
-          <article class="vs-item">
-            <div class="vs-num">i.</div>
-            <div class="vs-col">
-              <h3 class="vs-title">
-                <span class="pre">vs</span>The data trackers
-              </h3>
-              <p class="vs-who">
-                Garmin · Apple Health · Fitbit · Suunto · Coros · Polar
-              </p>
-              <p class="vs-pull">They measure beautifully. They don't plan.</p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">i.</div>
+              <div class="vs-col">
+                <h3 class="vs-title">
+                  <span class="pre">vs</span>The data trackers
+                </h3>
+                <p class="vs-who">
+                  Garmin · Apple Health · Fitbit · Suunto · Coros · Polar
+                </p>
+                <p class="vs-pull">They measure beautifully. They don't plan.</p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 Heart rate zones, splits, training load, sleep stages, recovery
                 scores; the wearables ecosystem is extraordinary at telling you
@@ -992,38 +1094,51 @@
                 <strong>Justus is a coach first</strong>: the plan leads, the
                 data supports, and your watch doesn't matter.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
 
-          <article class="vs-item">
-            <div class="vs-num">ii.</div>
-            <div class="vs-col">
-              <h3 class="vs-title">
-                <span class="pre">vs</span>General chatbots
-              </h3>
-              <p class="vs-who">Claude · ChatGPT · Gemini</p>
-              <p class="vs-pull">Brilliant, but a stranger every time.</p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">ii.</div>
+              <div class="vs-col">
+                <h3 class="vs-title">
+                  <span class="pre">vs</span>General chatbots
+                </h3>
+                <p class="vs-who">Claude · ChatGPT · Gemini</p>
+                <p class="vs-pull">Brilliant, but a stranger every time.</p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 General-purpose AI is powerful, but you have to re-explain your
                 situation, paste data, upload screenshots, and remember to come
                 back. It can't see Tuesday's workout unless you tell it. It
                 can't write the plan you log against, and it can't follow up.
-                <strong
-                  >Justus holds a durable profile across years</strong
-                >, maintains an actual plan, and reaches out when it should,
-                not just when you remember to ask.
+                <strong>Justus holds a durable profile across years</strong>,
+                maintains an actual plan, and reaches out when it should, not
+                just when you remember to ask.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
 
-          <article class="vs-item">
-            <div class="vs-num">iii.</div>
-            <div class="vs-col">
-              <h3 class="vs-title"><span class="pre">vs</span>Runna</h3>
-              <p class="vs-who">The running-first training app</p>
-              <p class="vs-pull">
-                Excellent for one race. Less so for the rest of your life.
-              </p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">iii.</div>
+              <div class="vs-col">
+                <h3 class="vs-title"><span class="pre">vs</span>Runna</h3>
+                <p class="vs-who">The running-first training app</p>
+                <p class="vs-pull">
+                  Excellent for one race. Less so for the rest of your life.
+                </p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 Runna is the best running-first app on the market. Its plans
                 are template-driven by elite coaches and adjust pace targets as
@@ -1034,17 +1149,24 @@
                 tell it about a sore knee or a missed week and the plan
                 reshapes around you, across every modality you train.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
 
-          <article class="vs-item">
-            <div class="vs-num">iv.</div>
-            <div class="vs-col">
-              <h3 class="vs-title">
-                <span class="pre">vs</span>The strength loggers
-              </h3>
-              <p class="vs-who">Fitbod · Strong · Hevy</p>
-              <p class="vs-pull">Great progression. Stops at the gym door.</p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">iv.</div>
+              <div class="vs-col">
+                <h3 class="vs-title">
+                  <span class="pre">vs</span>The strength loggers
+                </h3>
+                <p class="vs-who">Fitbod · Strong · Hevy</p>
+                <p class="vs-pull">Great progression. Stops at the gym door.</p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 These have some of the best strength logging and progression in
                 the category. They also can't see your sleep, your HRV, the run
@@ -1056,17 +1178,24 @@
                   modality</strong
                 >, and reads the recovery signals the loggers can't see.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
 
-          <article class="vs-item">
-            <div class="vs-num">v.</div>
-            <div class="vs-col">
-              <h3 class="vs-title">
-                <span class="pre">vs</span>The recovery wearables
-              </h3>
-              <p class="vs-who">Whoop · Oura · Fitbit Air</p>
-              <p class="vs-pull">A complement, not a competitor.</p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">v.</div>
+              <div class="vs-col">
+                <h3 class="vs-title">
+                  <span class="pre">vs</span>The recovery wearables
+                </h3>
+                <p class="vs-who">Whoop · Oura · Fitbit Air</p>
+                <p class="vs-pull">A complement, not a competitor.</p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 These read your body (sleep, HRV, readiness) better than
                 anything. What they don't do is build or log workouts.
@@ -1075,25 +1204,33 @@
                 push tomorrow's intervals, hold the deload when your body is
                 asking for it.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
 
-          <article class="vs-item">
-            <div class="vs-num">vi.</div>
-            <div class="vs-col">
-              <h3 class="vs-title">
-                <span class="pre">vs</span>Everything else
-              </h3>
-              <p class="vs-who">The default fitness-app experience</p>
-              <p class="vs-pull">Truly AI-native. Quiet by design.</p>
+          <details class="vs-item">
+            <summary class="vs-summary">
+              <div class="vs-num">vi.</div>
+              <div class="vs-col">
+                <h3 class="vs-title">
+                  <span class="pre">vs</span>Everything else
+                </h3>
+                <p class="vs-who">The default fitness-app experience</p>
+                <p class="vs-pull">Truly AI-native. Quiet by design.</p>
+              </div>
+              <div class="vs-toggle" aria-hidden="true"></div>
+            </summary>
+            <div class="vs-body">
+              <div></div>
               <p class="vs-p">
                 A conversation, not a form. One coach across every surface,
                 with shared context. No gym-bro themes, no "perfect" bodies, no
                 walls of unexplained numbers, no leaderboards, no feeds, no
                 friend requests.
               </p>
+              <div></div>
             </div>
-          </article>
+          </details>
         </div>
       </section>
 
@@ -1422,17 +1559,34 @@
         });
       });
 
-      // ─── Smooth-scroll for in-page anchors ───
+      // ─── Smooth-scroll for in-page anchors (clears sticky nav) ───
       document.querySelectorAll('a[href^="#"]').forEach(function (a) {
         a.addEventListener('click', function (e) {
           var id = a.getAttribute('href').slice(1);
           var el = document.getElementById(id);
           if (el) {
             e.preventDefault();
-            window.scrollTo({ top: el.offsetTop - 24, behavior: 'smooth' });
+            var nav = document.getElementById('site-nav');
+            var navH = nav ? nav.getBoundingClientRect().height : 0;
+            window.scrollTo({
+              top: el.getBoundingClientRect().top + window.scrollY - navH - 16,
+              behavior: 'smooth',
+            });
           }
         });
       });
+
+      // ─── Nav border appears when scrolled past the top ───
+      (function () {
+        var nav = document.getElementById('site-nav');
+        if (!nav) return;
+        function onScroll() {
+          if (window.scrollY > 4) nav.classList.add('is-scrolled');
+          else nav.classList.remove('is-scrolled');
+        }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      })();
     </script>
   </body>
 </html>
