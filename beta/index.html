@@ -19,6 +19,9 @@
       posthog.capture('beta_page_viewed');
     </script>
 
+    <!-- LaunchList referral tracking -->
+    <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
+
     <style>
       :root {
         --bg-canvas: #faf9f7;
@@ -350,6 +353,53 @@
         text-decoration-color: var(--success);
       }
 
+      /* ─── Inline waitlist form (referral capture) ─── */
+      .beta-form {
+        display: flex;
+        gap: 8px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        padding: 6px 6px 6px 22px;
+        align-items: center;
+        margin-top: 18px;
+        max-width: 460px;
+        transition: border-color 160ms ease, box-shadow 160ms ease;
+      }
+      .beta-form:focus-within {
+        border-color: var(--fg-2);
+        box-shadow: 0 0 0 4px rgba(92, 138, 92, 0.08);
+      }
+      .beta-form input[type='email'] {
+        flex: 1;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        font: inherit;
+        font-size: 15px;
+        color: var(--fg-1);
+        padding: 12px 0;
+        min-width: 0;
+      }
+      .beta-form input::placeholder {
+        color: var(--fg-3);
+      }
+      .beta-form button {
+        border: 0;
+        background: var(--fg-1);
+        color: #fff;
+        font: inherit;
+        font-weight: 600;
+        font-size: 14px;
+        padding: 12px 20px;
+        border-radius: 999px;
+        cursor: pointer;
+        transition: opacity 120ms ease;
+      }
+      .beta-form button:hover {
+        opacity: 0.88;
+      }
+
       /* ─── Download row ─── */
       .download-row {
         display: grid;
@@ -581,6 +631,41 @@
             </ul>
           </div>
         </details>
+
+        <details class="drawer">
+          <summary>
+            <span>Help me build a waitlist</span>
+            <span class="toggle" aria-hidden="true"></span>
+          </summary>
+          <div class="drawer-body">
+            <h3>Bring the right people <span class="italic">into the slow rollout</span>.</h3>
+            <p>
+              Join the waitlist below. You'll get a personal referral link by
+              email; share it with anyone you think would be a fit.
+            </p>
+            <form
+              id="beta-waitlist"
+              class="beta-form launchlist-form"
+              action="https://getlaunchlist.com/s/VfMDfO"
+              method="post"
+            >
+              <input
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+                autocomplete="email"
+              />
+              <input type="hidden" name="utm_source" value="" />
+              <input type="hidden" name="utm_medium" value="" />
+              <input type="hidden" name="utm_campaign" value="" />
+              <input type="hidden" name="utm_content" value="" />
+              <input type="hidden" name="utm_term" value="" />
+              <input type="hidden" name="referrer" value="beta-page" />
+              <button type="submit">Join</button>
+            </form>
+          </div>
+        </details>
       </div>
 
       <section class="section">
@@ -662,6 +747,37 @@
           }
         });
       });
+
+      // UTM passthrough for the inline waitlist form
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(
+          function (key) {
+            var val = params.get(key);
+            if (!val) return;
+            document.querySelectorAll('input[name="' + key + '"]').forEach(function (el) {
+              el.value = val;
+            });
+          }
+        );
+      })();
+
+      // PostHog tracking for the beta-page waitlist signup
+      (function () {
+        var form = document.getElementById('beta-waitlist');
+        if (!form) return;
+        form.addEventListener('submit', function () {
+          if (!window.posthog) return;
+          var email = form.querySelector('input[type=email]').value.trim();
+          if (email) posthog.identify(email);
+          posthog.capture('waitlist_submitted', {
+            form_location: 'beta',
+            utm_source: form.querySelector('input[name=utm_source]').value || null,
+            utm_medium: form.querySelector('input[name=utm_medium]').value || null,
+            utm_campaign: form.querySelector('input[name=utm_campaign]').value || null,
+          });
+        });
+      })();
 
       // Only one drawer open at a time
       document.querySelectorAll('.drawer').forEach(function (item) {
