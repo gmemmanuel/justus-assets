@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>What is an AI fitness coach? A plain-language 2026 explainer — Justus</title>
+    <meta name="description" content="An AI fitness coach is software that plans, adapts, and follows up on your training. Here's what they actually do, where they came from, what they can't do, and how to think about them." />
+    <link rel="canonical" href="https://justus.health/guides/what-is-an-ai-fitness-coach/" />
+
+    <meta property="og:title" content="What is an AI fitness coach? A plain-language explainer" />
+    <meta property="og:description" content="What an AI fitness coach actually does, where they came from, what they can't do, and how to think about them. Plain language, no hype." />
+    <meta property="og:url" content="https://justus.health/guides/what-is-an-ai-fitness-coach/" />
+    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://justus.health/splash-icon.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <link rel="icon" type="image/svg+xml" href="/bimi-logo.svg" />
+    <link rel="apple-touch-icon" href="/splash-icon.png" />
+    <link rel="stylesheet" href="/aiso.css" />
+    <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
+
+    <script>window.PAGE_SLUG = 'guide-what-is-ai-coach';</script>
+    <script src="/aiso-init.js"></script>
+
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"What is an AI fitness coach?","acceptedAnswer":{"@type":"Answer","text":"An AI fitness coach is software that holds your training plan, learns about you over time, and adapts the plan when life happens. The good ones do four things together: build and maintain a plan, hold a persistent profile of you, read your wearable data, and follow up via conversation. A workout-generator with a chatbot attached is not really an AI coach; the architecture matters."}},
+        {"@type":"Question","name":"How does AI fitness coaching work?","acceptedAnswer":{"@type":"Answer","text":"At its core: large language models trained on training-science literature, given access to your profile and recent data, asked to plan or adjust your training. The good apps wrap that with a persistent memory layer (so the AI remembers you), wearable integrations (so it can see your data), and safety guardrails (so it doesn't recommend dangerous progressions). The conversation is the interface; the model is the engine; the data layer is what makes it personal."}},
+        {"@type":"Question","name":"Is an AI fitness coach better than a regular workout app?","acceptedAnswer":{"@type":"Answer","text":"For most people, yes — but the comparison isn't always clean. A traditional workout app gives you a static plan; an AI coach gives you a plan that adapts. A traditional app has a chatbot bolted on; an AI coach is a coach, with the interface being a conversation. The distinction matters: 'AI features' on a regular app aren't the same as an app built around AI coaching."}},
+        {"@type":"Question","name":"Are AI fitness coaches safe?","acceptedAnswer":{"@type":"Answer","text":"The well-built ones are. Safety in this category means three things: conservative progression rules (no jumping volume more than 10% week-over-week), escalation paths for medical concerns (chest pain, injury, eating-disorder language), and clear limits on what the coach will not do. Look for products that disclose how safety is handled. Avoid anything that promises personalized medical advice — that's outside the lane."}},
+        {"@type":"Question","name":"What can an AI fitness coach not do?","acceptedAnswer":{"@type":"Answer","text":"Three things, honestly. First: in-person form correction. AI can describe cues but can't physically see you. Second: replace a doctor or physical therapist. Medical conditions need humans. Third: build the relationship that a long-term human coach builds. AI can hold facts about you reliably; the warmth of a years-long human relationship is something else."}}
+      ]
+    }
+    </script>
+  </head>
+  <body>
+    <nav class="nav" id="site-nav">
+      <div class="nav-inner">
+        <a href="/" class="mark">Justus</a>
+        <span class="stamp">Research preview · 2026</span>
+        <div class="nav-links">
+          <a href="/#why">Why Justus</a>
+          <a href="/#faq">FAQ</a>
+          <a href="/#get-early-access">Waitlist</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="shell">
+      <section class="hero">
+        <p class="eyebrow">Guide · What is an AI fitness coach</p>
+        <h1>What is an <span class="italic">AI fitness coach</span>?</h1>
+        <p class="lede">
+          An AI fitness coach is software that holds your training plan,
+          learns about you over time, and adapts the plan when life
+          happens. Plain language. No hype. Here's what they actually do,
+          where they came from, what they can and can't do, and how to
+          think about picking one.
+        </p>
+      </section>
+
+      <section class="answer" aria-label="Quick answer">
+        <p class="label">Quick answer</p>
+        <ul>
+          <li><strong>An AI fitness coach is software that coaches you.</strong> Not a workout library. Not a chatbot bolted onto an app. A product designed around the coaching job: planning, memory, adaptation, follow-up.</li>
+          <li><strong>It does four things together:</strong> builds and maintains a plan, holds a persistent profile of you, reads your wearable data, and follows up via conversation.</li>
+          <li><strong>The model is the engine.</strong> Modern AI coaches run on large language models trained on training-science literature, with structured prompts and tool calls.</li>
+          <li><strong>The data layer is what makes it personal.</strong> A profile of you (goals, constraints, history) plus your recent training and wearable data.</li>
+          <li><strong>Safety is part of the architecture.</strong> Conservative progression rules, escalation paths for medical concerns, clear limits on what the coach will and won't do.</li>
+          <li><strong>What it can't do:</strong> see your form in real time, replace a doctor, or replicate a years-long human coaching relationship.</li>
+        </ul>
+      </section>
+
+      <section class="section">
+        <h2>What an AI fitness coach <span class="italic">actually does</span>.</h2>
+        <p>The category is new enough that the definition is still being negotiated. Here's the honest version, ignoring the marketing.</p>
+      </section>
+
+      <section class="dive">
+        <h3>1. <span class="italic">Plans</span> your training</h3>
+        <p>An AI coach builds a training plan based on your goals, your constraints, your history, and the principles of training science. The plan is structured: sessions on specific days, with targets (duration, intensity, exercises). It periodizes &mdash; it has a long arc of base, build, peak, and taper, not just a flat week-after-week repeat.</p>
+        <p>What makes it "AI" rather than a template: the plan is generated for <em>you</em>, with your specific inputs. Two users with similar goals get different plans.</p>
+      </section>
+
+      <section class="dive">
+        <h3>2. <span class="italic">Remembers</span> you</h3>
+        <p>A persistent profile is the core of what makes AI coaching different from a chatbot. The coach knows your name, your training history, your injuries, your preferences, what worked and what didn't.</p>
+        <p>This isn't optional. <strong>A coach without memory isn't a coach.</strong> It's a stranger with a clipboard, every time.</p>
+      </section>
+
+      <section class="dive">
+        <h3>3. <span class="italic">Reads</span> your data</h3>
+        <p>Modern AI coaches plug into your wearable: Apple Watch, Garmin, Whoop, Oura, Fitbit, or whatever syncs to Apple Health or Health Connect. Sleep, heart rate, training load, workouts &mdash; all of it informs the plan.</p>
+        <p>This is the part that turns a generic plan into a personalized one. If your sleep has been short for a week, the coach knows. If you ran intervals on Tuesday, tomorrow's session reflects it.</p>
+      </section>
+
+      <section class="dive">
+        <h3>4. <span class="italic">Adapts</span> when life happens</h3>
+        <p>This is the part that separates AI coaching from any static plan you could download. You tell the coach: "I missed two days, my knee is sore, I'm traveling next week," and the plan reshapes around you. Conversationally. Without you having to redraft anything.</p>
+        <p>A traditional plan is a worksheet. <strong>An AI coach is the thing that updates the worksheet when reality intervenes.</strong></p>
+      </section>
+
+      <section class="dive">
+        <h3>5. <span class="italic">Follows up</span></h3>
+        <p>The best AI coaches don't only respond when you open the app. They reach out: a check-in on Monday, a nudge after a missed workout, a question about how a new exercise felt. Coaching is a conversation that continues, not a single Q&amp;A.</p>
+        <p>This is also where the product design matters. <em>Too many check-ins is nagging. Too few is silence.</em> Getting the cadence right is part of what separates a real AI coach from a notification scheduler.</p>
+      </section>
+
+      <section class="section">
+        <h2>How it <span class="italic">actually works</span> under the hood.</h2>
+        <p>Plain language. No jargon. If you want to know what the technology is, here it is.</p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">model</span></h3>
+        <p>A large language model &mdash; the same kind of model that powers ChatGPT, Claude, and Gemini &mdash; sits at the core. It's been trained on huge amounts of text, including most of the published training-science literature. The model can reason about training, answer questions, and produce structured output (a plan, a session, an answer).</p>
+        <p>Different products use different underlying models, and the choice can change over time as the technology evolves. <em>The underlying model matters less than the system built around it.</em></p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">system around the model</span></h3>
+        <p>This is the part most people don't see. A good AI coach is built from a handful of agents (or one model with structured tasks), each handling a piece of the job: planning, daily conversation, profile updates, safety checks.</p>
+        <p>When you talk to the coach, the system pulls together: your profile, your recent data, the relevant tools (create a plan, update a plan, log a workout), and the model's training-science knowledge. <strong>The conversation is the interface; the system is the coach.</strong></p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">data layer</span></h3>
+        <p>A database holds your profile, your plan, your sessions, your conversation history. This is what "persistent memory" actually means &mdash; not a vibe, a database. Every time you talk to the coach, this data is the context.</p>
+        <p>The privacy implications matter. <em>Pick a coach that's clear about what it stores, how it secures it, and how to delete it.</em></p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">safety layer</span></h3>
+        <p>This is the part that separates a serious AI coach from a chatbot. Safety means: conservative progression defaults (don't jump volume more than ~10% week-over-week), escalation paths for medical concerns (chest pain, injury, eating-disorder language), and clear limits on what the coach will not do (no diagnosis, no prescription, no replacement for a doctor or PT).</p>
+        <p>The well-built coaches disclose how safety is handled. The ones that don't are worth treating with suspicion.</p>
+      </section>
+
+      <section class="section">
+        <h2>Where AI fitness coaches <span class="italic">came from</span>.</h2>
+        <p>Short version of the history. Useful because the category is moving fast and a lot of the "AI coach" branding pre-dates real AI coaching.</p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">algorithmic era</span> (2010s)</h3>
+        <p>Before LLMs, "AI" in fitness apps meant rule-based algorithms. Fitbod, Freeletics, and others used decision trees to pick your next workout based on what you'd done. This worked, but the system couldn't really talk to you. It made decisions; it didn't explain them.</p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">LLM era</span> (2023+)</h3>
+        <p>ChatGPT's public launch in 2022 changed the category. Suddenly, software could have a real conversation about your training. The first wave of "AI coaches" was mostly ChatGPT wrappers &mdash; useful for one-off questions, but not really coaching.</p>
+        <p>The current generation (2025&ndash;2026) is the first to be designed from the ground up as coaches: persistent memory, structured plans, wearable integration, follow-up. <em>Justus is part of this generation.</em></p>
+      </section>
+
+      <section class="dive">
+        <h3>The <span class="italic">next</span> wave</h3>
+        <p>Multimodal models (text + audio + video) will eventually mean an AI coach can see your form on a phone camera. Specialized models trained on fitness-specific data will outperform general-purpose ones for this category. Better wearables will mean more useful data. The category is moving, and the products that exist today are early.</p>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2>Common questions <span class="italic">about AI fitness coaches</span>.</h2>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-q"><span>What is an AI fitness coach?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+              <p>An AI fitness coach is software that holds your training plan, learns about you over time, and adapts the plan when life happens. The good ones do four things together: build and maintain a plan, hold a persistent profile of you, read your wearable data, and follow up via conversation.</p>
+              <p><em>A workout-generator with a chatbot attached is not really an AI coach; the architecture matters.</em></p>
+            </div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>How does AI fitness coaching work?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+              <p>At its core: large language models trained on training-science literature, given access to your profile and recent data, asked to plan or adjust your training.</p>
+              <p>The good apps wrap that with a persistent memory layer (so the AI remembers you), wearable integrations (so it can see your data), and safety guardrails (so it doesn't recommend dangerous progressions). The conversation is the interface; the model is the engine; the data layer is what makes it personal.</p>
+            </div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>Is an AI fitness coach better than a regular workout app?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+              <p>For most people, yes &mdash; but the comparison isn't always clean. A traditional workout app gives you a static plan; an AI coach gives you a plan that adapts. A traditional app has a chatbot bolted on; an AI coach is a coach, with the interface being a conversation.</p>
+              <p>The distinction matters: "AI features" on a regular app aren't the same as an app built around AI coaching.</p>
+            </div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>Are AI fitness coaches safe?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+              <p>The well-built ones are. Safety in this category means three things: conservative progression rules (no jumping volume more than 10% week-over-week), escalation paths for medical concerns (chest pain, injury, eating-disorder language), and clear limits on what the coach will not do.</p>
+              <p>Look for products that disclose how safety is handled. Avoid anything that promises personalized medical advice &mdash; that's outside the lane.</p>
+            </div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>What can an AI fitness coach not do?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a">
+              <p>Three things, honestly. First: <strong>in-person form correction</strong>. AI can describe cues but can't physically see you. Second: <strong>replace a doctor or physical therapist</strong>. Medical conditions need humans. Third: <strong>build the relationship that a long-term human coach builds</strong>.</p>
+              <p>AI can hold facts about you reliably; the warmth of a years-long human relationship is something else.</p>
+            </div></div></div>
+          </details>
+        </div>
+      </section>
+
+      <section class="closer">
+        <div class="word-small">Justus<span class="dot">.</span></div>
+        <div class="tag">Your private AI fitness coach.</div>
+        <form class="form launchlist-form waitlist-form" action="https://getlaunchlist.com/s/VfMDfO" method="post" data-form-location="guide-what-is-ai-coach-closer" novalidate>
+          <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" aria-label="Email address" />
+          <input type="hidden" name="utm_source" />
+          <input type="hidden" name="utm_medium" />
+          <input type="hidden" name="utm_campaign" />
+          <input type="hidden" name="utm_content" />
+          <input type="hidden" name="utm_term" />
+          <input type="hidden" name="referrer" />
+          <button type="submit">Join the waitlist</button>
+        </form>
+        <p class="form-error" data-form-error></p>
+      </section>
+
+      <footer class="site-footer">
+        <span>
+          <a href="/">Home</a>
+          <a href="/privacy/">Privacy</a>
+          <a href="/terms/">Terms</a>
+          <a href="mailto:hello@justus.health">hello@justus.health</a>
+        </span>
+      </footer>
+    </main>
+
+    <script src="/aiso.js"></script>
+  </body>
+</html>

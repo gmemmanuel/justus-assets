@@ -1,0 +1,12 @@
+# Justus — robots.txt
+# Allow all crawlers including AI search agents (GPTBot, ClaudeBot, Google-Extended, PerplexityBot, etc.)
+# The site is fully public; nothing sensitive is at a path we don't want indexed.
+
+User-agent: *
+Allow: /
+Disallow: /beta/
+
+# The /beta/ page is for invited testers only; not for public indexing.
+# It also includes a <meta name="robots" content="noindex"> on the page itself.
+
+Sitemap: https://justus.health/sitemap.xml

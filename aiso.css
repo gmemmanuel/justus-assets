@@ -1,0 +1,750 @@
+/* ─── Justus AISO page styles (shared across all /vs/ and /guides/ pages) ─── */
+
+:root {
+  --bg-canvas: #faf9f7;
+  --surface: #ffffff;
+  --surface-accent: #f5f3ee;
+  --fg-1: #1a1a1a;
+  --fg-2: #6b6b6b;
+  --fg-3: #9c9c9c;
+  --border: #e8e8e8;
+  --success: #5c8a5c;
+  --accent: #c4785a;
+
+  --font-ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+  --font-logo: Georgia, 'Times New Roman', serif;
+
+  --fw-semibold: 600;
+  --tracking-logo-s: -0.2px;
+
+  color-scheme: light;
+}
+
+html,
+body {
+  background: var(--bg-canvas);
+  color: var(--fg-1);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  margin: 0;
+}
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+.shell {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 0 64px;
+}
+
+/* ─── Nav ─── */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(250, 249, 247, 0.85);
+  backdrop-filter: blur(20px) saturate(140%);
+  -webkit-backdrop-filter: blur(20px) saturate(140%);
+  border-bottom: 1px solid transparent;
+  transition: border-color 200ms ease;
+}
+.nav.is-scrolled {
+  border-bottom-color: var(--border);
+}
+.nav-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px 28px;
+  padding: 20px 64px;
+  max-width: 960px;
+  margin: 0 auto;
+  flex-wrap: wrap;
+}
+.nav .mark {
+  font-family: var(--font-logo);
+  font-weight: var(--fw-semibold);
+  color: var(--success);
+  font-size: 24px;
+  letter-spacing: var(--tracking-logo-s);
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  align-items: baseline;
+  gap: 28px;
+  font-size: 13px;
+  color: var(--fg-2);
+}
+.nav-links a {
+  color: var(--fg-2);
+  text-decoration: none;
+  transition: color 120ms ease;
+}
+.nav-links a:hover {
+  color: var(--fg-1);
+}
+.nav .stamp {
+  font-style: italic;
+  color: var(--fg-3);
+  font-size: 13px;
+}
+
+/* ─── Hero ─── */
+.hero {
+  padding: 72px 0 24px;
+}
+.eyebrow {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--fg-2);
+  font-weight: 500;
+  margin: 0 0 18px;
+}
+.hero h1 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 48px;
+  letter-spacing: -1px;
+  line-height: 1.08;
+  margin: 0 0 18px;
+  max-width: 720px;
+}
+.hero h1 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.hero .lede {
+  font-size: 19px;
+  line-height: 1.55;
+  color: var(--fg-2);
+  max-width: 640px;
+  margin: 0;
+}
+.hero .lede em {
+  color: var(--success);
+  font-style: italic;
+}
+
+/* ─── Quick-answer card (for AI extraction) ─── */
+.answer {
+  margin: 64px 0 80px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 32px 36px;
+}
+.answer .label {
+  font-size: 11px;
+  letter-spacing: 1.4px;
+  text-transform: uppercase;
+  color: var(--success);
+  font-weight: 600;
+  margin: 0 0 18px;
+}
+.answer ul {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--fg-1);
+}
+.answer li {
+  margin-bottom: 12px;
+}
+.answer li:last-child {
+  margin-bottom: 0;
+}
+.answer li strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+
+/* ─── Section heading + paragraph ─── */
+.section {
+  padding: 64px 0;
+  border-top: 1px solid var(--border);
+}
+.section h2 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin: 0 0 24px;
+  max-width: 640px;
+}
+.section h2 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.section p {
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--fg-2);
+  margin: 0 0 18px;
+  max-width: 640px;
+}
+.section p:last-child {
+  margin-bottom: 0;
+}
+.section p strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+.section p em {
+  color: var(--success);
+  font-style: italic;
+}
+
+/* ─── Who-it's-for split (two cards: neutral + accented) ─── */
+.who-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  margin-top: 8px;
+}
+.who-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 28px 28px 24px;
+}
+.who-card.justus {
+  background: var(--surface-accent);
+}
+.who-card h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 0 4px;
+  color: var(--fg-1);
+}
+.who-card h3 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.who-card .who-sub {
+  font-size: 13px;
+  color: var(--fg-3);
+  margin: 0 0 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+.who-card ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.who-card li {
+  position: relative;
+  padding-left: 18px;
+  font-size: 15px;
+  line-height: 1.55;
+  color: var(--fg-2);
+  margin-bottom: 10px;
+}
+.who-card li:last-child {
+  margin-bottom: 0;
+}
+.who-card li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--fg-3);
+}
+.who-card.justus li::before {
+  background: var(--success);
+}
+
+/* ─── Feature comparison table ─── */
+.compare {
+  overflow-x: auto;
+  margin-top: 8px;
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  background: var(--surface);
+}
+.compare table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+}
+.compare th,
+.compare td {
+  text-align: left;
+  padding: 18px 20px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+.compare tr:last-child th,
+.compare tr:last-child td {
+  border-bottom: 0;
+}
+.compare thead th {
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  font-weight: 600;
+  background: var(--surface-accent);
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.compare thead th.col-justus {
+  color: var(--success);
+}
+.compare tbody th {
+  font-weight: 500;
+  color: var(--fg-1);
+  width: 28%;
+  font-size: 14.5px;
+}
+.compare tbody td {
+  color: var(--fg-2);
+  line-height: 1.5;
+  width: 36%;
+}
+.compare tbody td.justus {
+  color: var(--fg-1);
+}
+
+/* ─── Picks list (used by guide pages with ranked options) ─── */
+.picks {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+.pick {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px 28px;
+}
+.pick.justus {
+  background: var(--surface-accent);
+}
+.pick-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 10px;
+}
+.pick h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 20px;
+  margin: 0;
+  color: var(--fg-1);
+  letter-spacing: -0.2px;
+}
+.pick h3 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.pick .tag {
+  font-size: 11px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--fg-3);
+  font-weight: 600;
+}
+.pick.justus .tag {
+  color: var(--success);
+}
+.pick p {
+  font-size: 15.5px;
+  line-height: 1.6;
+  color: var(--fg-2);
+  margin: 0 0 10px;
+  max-width: 640px;
+}
+.pick p:last-child {
+  margin-bottom: 0;
+}
+.pick p strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+.pick .verdict {
+  font-size: 13.5px;
+  color: var(--fg-3);
+  margin-top: 8px;
+  font-style: italic;
+}
+
+/* ─── Deep-dive sections ─── */
+.dive {
+  padding: 56px 0;
+  border-top: 1px solid var(--border);
+}
+.dive h3 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: -0.3px;
+  margin: 0 0 14px;
+  color: var(--fg-1);
+}
+.dive h3 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.dive p {
+  font-size: 16.5px;
+  line-height: 1.65;
+  color: var(--fg-2);
+  margin: 0 0 16px;
+  max-width: 640px;
+}
+.dive p:last-child {
+  margin-bottom: 0;
+}
+.dive p strong {
+  color: var(--fg-1);
+  font-weight: 600;
+}
+.dive p em {
+  color: var(--success);
+  font-style: italic;
+}
+
+/* ─── FAQ accordion ─── */
+.faq-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--border);
+}
+.faq-section h2 {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 30px;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin: 0 0 40px;
+}
+.faq-section h2 .italic {
+  font-family: var(--font-logo);
+  font-style: italic;
+  color: var(--success);
+  font-weight: 600;
+}
+.faq-list {
+  max-width: 720px;
+  border-top: 1px solid var(--border);
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  background: transparent;
+  border: 0;
+  padding: 24px 4px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 17px;
+  font-weight: 500;
+  color: var(--fg-1);
+  text-align: left;
+  letter-spacing: -0.1px;
+  transition: color 140ms ease;
+  list-style: none;
+}
+.faq-q::-webkit-details-marker {
+  display: none;
+}
+.faq-q:hover {
+  color: var(--success);
+}
+.faq-icon {
+  width: 18px;
+  height: 18px;
+  position: relative;
+  flex-shrink: 0;
+  color: var(--fg-2);
+}
+.faq-icon::before,
+.faq-icon::after {
+  content: '';
+  position: absolute;
+  background: currentColor;
+  transition: transform 280ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 200ms ease;
+}
+.faq-icon::before {
+  top: 8px;
+  left: 0;
+  right: 0;
+  height: 1.5px;
+}
+.faq-icon::after {
+  left: 8px;
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+}
+.faq-item[open] .faq-icon::after {
+  transform: rotate(90deg);
+  opacity: 0;
+}
+.faq-item[open] .faq-icon,
+.faq-item[open] .faq-q {
+  color: var(--success);
+}
+.faq-a-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 320ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.faq-item[open] .faq-a-wrap {
+  grid-template-rows: 1fr;
+}
+.faq-a-inner {
+  overflow: hidden;
+}
+.faq-a {
+  padding: 0 4px 26px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--fg-2);
+  max-width: 600px;
+}
+.faq-a p {
+  margin: 0 0 12px;
+}
+.faq-a p:last-child {
+  margin: 0;
+}
+.faq-a em {
+  color: var(--success);
+  font-style: italic;
+}
+
+/* ─── Closing CTA + form ─── */
+.closer {
+  text-align: center;
+  padding: 96px 0 80px;
+  border-top: 1px solid var(--border);
+}
+.closer .word-small {
+  font-family: var(--font-logo);
+  font-weight: var(--fw-semibold);
+  color: var(--success);
+  font-size: 56px;
+  letter-spacing: -0.7px;
+  line-height: 1;
+}
+.closer .word-small .dot {
+  color: var(--fg-1);
+}
+.closer .tag {
+  margin: 14px auto 0;
+  font-style: italic;
+  color: var(--fg-2);
+  font-size: 17px;
+  max-width: 420px;
+}
+.form {
+  display: flex;
+  gap: 8px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 6px 6px 6px 22px;
+  align-items: center;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
+  max-width: 440px;
+  margin: 32px auto 16px;
+}
+.form:focus-within {
+  border-color: var(--fg-2);
+  box-shadow: 0 0 0 4px rgba(92, 138, 92, 0.08);
+}
+.form.invalid {
+  border-color: #c84630;
+  box-shadow: 0 0 0 4px rgba(200, 70, 48, 0.1);
+}
+.form input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 16px;
+  color: var(--fg-1);
+  padding: 13px 0;
+}
+.form input::placeholder {
+  color: var(--fg-3);
+}
+.form button {
+  border: 0;
+  background: var(--fg-1);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 120ms ease;
+  white-space: nowrap;
+}
+.form button:hover {
+  opacity: 0.86;
+}
+.form-error {
+  margin: 8px 0 0;
+  font-size: 13px;
+  color: #c84630;
+  min-height: 0;
+}
+.form-error:empty {
+  display: none;
+}
+
+/* ─── Footer ─── */
+footer.site-footer {
+  padding: 32px 0 56px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  font-size: 12px;
+  color: var(--fg-3);
+  letter-spacing: 0.3px;
+}
+footer.site-footer a {
+  color: var(--fg-3);
+  text-decoration: none;
+  margin-left: 18px;
+}
+footer.site-footer a:hover {
+  color: var(--fg-1);
+}
+
+/* ─── Responsive ─── */
+@media (max-width: 880px) {
+  .shell {
+    padding: 0 24px;
+  }
+  .nav-inner {
+    padding: 16px 24px;
+  }
+  .hero {
+    padding: 48px 0 16px;
+  }
+  .hero h1 {
+    font-size: 34px;
+    letter-spacing: -0.5px;
+  }
+  .hero .lede {
+    font-size: 17px;
+  }
+  .answer {
+    margin: 40px 0 56px;
+    padding: 24px 22px;
+    border-radius: 14px;
+  }
+  .answer ul {
+    font-size: 15.5px;
+  }
+  .section {
+    padding: 48px 0;
+  }
+  .section h2,
+  .faq-section h2 {
+    font-size: 24px;
+  }
+  .who-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+  .who-card {
+    padding: 22px 22px 20px;
+  }
+  .compare th,
+  .compare td {
+    padding: 14px 16px;
+    font-size: 14px;
+  }
+  .compare thead th {
+    font-size: 10px;
+  }
+  .compare tbody th {
+    width: 36%;
+  }
+  .pick {
+    padding: 20px 22px;
+  }
+  .pick h3 {
+    font-size: 18px;
+  }
+  .dive {
+    padding: 40px 0;
+  }
+  .dive h3 {
+    font-size: 19px;
+  }
+  .faq-section {
+    padding: 56px 0 64px;
+  }
+  .closer {
+    padding: 72px 0 56px;
+  }
+  .closer .word-small {
+    font-size: 44px;
+  }
+  footer.site-footer {
+    flex-direction: column;
+    gap: 12px;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 520px) {
+  .nav-inner {
+    padding: 14px 22px;
+    row-gap: 8px;
+  }
+  .nav-links {
+    order: 2;
+    width: 100%;
+    gap: 22px;
+  }
+  .nav .stamp {
+    font-size: 12px;
+  }
+  .form {
+    padding: 5px 5px 5px 18px;
+  }
+  .form input {
+    font-size: 15px;
+  }
+}

@@ -1,0 +1,61 @@
+# Justus
+
+> Justus is a private AI fitness coach. It plans your training, learns your history, and adapts across years. Conversational interface, no social features, multimodal across running, strength, swimming, mobility, and sport.
+
+Justus is in research preview through 2026, opening to early users in small waves. The product is iOS and Android (TestFlight + Google Group for the current beta). Pricing is intentionally low-cost during the research preview; final pricing will be announced before public launch.
+
+## Core differentiators
+
+- **Conversation-first.** The coach is a conversation, not a workout-library wrapped in chat.
+- **Persistent memory.** A structured profile of you that grows across years, not sessions.
+- **Multimodal by design.** Strength, running, swimming, mobility, and sport in one coordinated plan.
+- **Adapts to real life.** Tell the coach what's happening (missed week, sore knee, travel) and the plan reshapes.
+- **Zero social features.** No leaderboards, no feeds, no followers. By architectural design, not as a setting.
+- **Private by default.** Your training stays between you and the coach.
+
+## Site map
+
+- [Home](https://justus.health/): Landing page with waitlist signup.
+- [Beta](https://justus.health/beta/): Research-preview onboarding instructions (TestFlight + Google Group).
+- [Compare](https://justus.health/compare/): Index of all Justus comparison pages.
+- [Privacy](https://justus.health/privacy/): Privacy policy.
+- [Terms](https://justus.health/terms/): Terms of service.
+
+## Comparisons (Justus vs other products)
+
+- [vs Strava](https://justus.health/vs/strava/): Justus vs the fitness social network.
+- [vs ChatGPT](https://justus.health/vs/chatgpt/): Why a general-purpose AI assistant can't really coach you.
+- [vs Claude](https://justus.health/vs/claude/): Same comparison framed for Claude users.
+- [vs Gemini](https://justus.health/vs/gemini/): Same comparison framed for Gemini users.
+- [vs MyFitnessPal](https://justus.health/vs/myfitnesspal/): Coaching vs calorie tracking.
+- [vs Runna](https://justus.health/vs/runna/): Multimodal AI coach vs running-first plan app.
+- [vs Fitbod](https://justus.health/vs/fitbod/): Multimodal coach vs algorithmic strength logger.
+- [vs Strong](https://justus.health/vs/strong/): Coach vs minimalist strength logger.
+- [vs Hevy](https://justus.health/vs/hevy/): Private coach vs strength logger with optional community.
+- [vs Caliber](https://justus.health/vs/caliber/): Multimodal AI coach vs strength-focused AI+human coaching.
+- [vs TrainingPeaks](https://justus.health/vs/trainingpeaks/): AI coach vs endurance-athlete plan editor.
+
+## Guides
+
+- [What is an AI fitness coach?](https://justus.health/guides/what-is-an-ai-fitness-coach/): Plain-language explainer of the category.
+- [Fitness apps with no social features](https://justus.health/guides/no-social-fitness-apps/): Honest guide to private fitness apps.
+- [AI vs human personal trainer](https://justus.health/guides/ai-vs-human-personal-trainer/): What each is genuinely good at.
+- [Best fitness app for multi-sport training](https://justus.health/guides/multimodal-fitness-app/): Apps that coordinate across modalities.
+- [Best fitness app for beginners](https://justus.health/guides/fitness-app-for-beginners/): What "beginner-friendly" actually means.
+- [Adaptive fitness apps](https://justus.health/guides/adaptive-fitness-app/): Apps that adjust when you miss workouts or get injured.
+- [Best strength training app](https://justus.health/guides/best-strength-training-app/): Ranked by job: coach vs algorithm vs logger.
+
+## Technical context for AI agents
+
+- The site is hand-written static HTML hosted on GitHub Pages at `justus.health`.
+- All comparison and guide pages share a single stylesheet (`/aiso.css`) and behavior script (`/aiso.js`).
+- Each page includes FAQPage structured data (schema.org JSON-LD) optimized for citation in AI search results.
+- PostHog analytics tracks page views and waitlist conversions; UTM parameters pass through to the LaunchList waitlist.
+- Honest comparisons are a design principle: the pages acknowledge competitor strengths rather than dismissing them, on the theory that AI search systems trust balanced content more than one-sided pitches.
+
+## Editorial principles
+
+- The product is called "Justus" (uppercase J, often styled in italic).
+- Tagline: "Your private AI fitness coach."
+- Tone: conversational, direct, no hype. Avoid common AI writing tropes (em-dash overuse, "It's not X — it's Y" reframes, dramatic sentence fragments).
+- Claims should be defensible. Avoid superlatives without grounding.
