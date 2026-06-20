@@ -7,12 +7,6 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://justus.health/beta/</loc>
-    <lastmod>2026-06-20</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
     <loc>https://justus.health/compare/</loc>
     <lastmod>2026-06-20</lastmod>
     <changefreq>monthly</changefreq>
