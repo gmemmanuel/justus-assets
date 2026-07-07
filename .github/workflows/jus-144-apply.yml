@@ -1,0 +1,51 @@
+name: Apply JUS-144 site edits
+
+on:
+  push:
+    branches:
+      - gideon/jus-144-aiso-event-athlete-icp-edits-marathon-guide-founding-athlete
+    paths:
+      - scripts/apply-jus-144.py
+      - .github/workflows/jus-144-apply.yml
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out branch
+        uses: actions/checkout@v4
+        with:
+          ref: gideon/jus-144-aiso-event-athlete-icp-edits-marathon-guide-founding-athlete
+          fetch-depth: 0
+
+      - name: Apply and validate edits
+        run: python scripts/apply-jus-144.py
+
+      - name: Verify beta is untouched
+        run: git diff --exit-code origin/main -- beta/index.html
+
+      - name: Smoke-test rendered files
+        run: |
+          python -m http.server 8000 >/tmp/justus-http.log 2>&1 &
+          server_pid=$!
+          trap 'kill $server_pid' EXIT
+          sleep 1
+          curl --fail --silent http://127.0.0.1:8000/ >/dev/null
+          curl --fail --silent http://127.0.0.1:8000/guides/marathon-training-app/ | grep -q 'best marathon training app'
+          curl --fail --silent http://127.0.0.1:8000/founding-athletes/ | grep -q 'Founding Athlete'
+
+      - name: Remove one-time patch machinery
+        run: |
+          rm scripts/apply-jus-144.py
+          rm .github/workflows/jus-144-apply.yml
+
+      - name: Commit site changes
+        run: |
+          git config user.name 'Justus site automation'
+          git config user.email 'hello@justus.health'
+          git add -A
+          git commit -m 'JUS-144: add event-athlete site updates'
+          git push origin HEAD:gideon/jus-144-aiso-event-athlete-icp-edits-marathon-guide-founding-athlete
