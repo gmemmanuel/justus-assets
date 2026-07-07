@@ -1,5 +1,6 @@
 name: Apply JUS-144 site edits
 
+# This follow-up commit exists so the workflow is already registered when the push event fires.
 on:
   push:
     branches:
