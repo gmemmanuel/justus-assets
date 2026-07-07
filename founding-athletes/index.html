@@ -15,17 +15,39 @@
     <link rel="icon" type="image/svg+xml" href="/bimi-logo.svg" />
     <link rel="apple-touch-icon" href="/splash-icon.png" />
     <link rel="stylesheet" href="/aiso.css" />
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Is the founding athlete program really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Selected founding athletes use the Justus research preview free from onboarding through their event, with no card required. In exchange we ask for candid feedback during the block."}},
+        {"@type":"Question","name":"How much time does the feedback part take?","acceptedAnswer":{"@type":"Answer","text":"Very little beyond training. Talking to the coach is the research — plus a short weekly check-in and honesty when something feels off. There are no long surveys or scheduled testing sessions."}},
+        {"@type":"Question","name":"What devices and platforms does Justus work with?","acceptedAnswer":{"@type":"Answer","text":"iOS and Android. Justus reads training data through Apple Health and Health Connect, so Apple Watch, Garmin, COROS, Suunto, Polar, Fitbit and most other devices work as long as workouts sync to your phone."}},
+        {"@type":"Question","name":"My event is not a marathon. Can I still apply?","acceptedAnswer":{"@type":"Answer","text":"Yes. Half-marathons, triathlons, open-water swims, gran fondos, ultras, a first 10K — what matters is a real event with a date and a training block in front of it."}},
+        {"@type":"Question","name":"What happens after my race?","acceptedAnswer":{"@type":"Answer","text":"Founding athletes keep free access through the research preview, and they get the first say in what the coach learns next. Nothing converts to a paid plan without you choosing it."}},
+        {"@type":"Question","name":"Is my training visible to anyone else?","acceptedAnswer":{"@type":"Answer","text":"No. Justus has no feeds, followers, leaderboards, or public profiles — permanently. Your training stays between you and your coach."}}
+      ]
+    }
+    </script>
     <script>window.PAGE_SLUG = 'founding-athletes';</script>
     <script src="/aiso-init.js"></script>
     <style>
       .cohort-note { max-width: 720px; margin: 28px auto 0; text-align: center; color: var(--fg-2); }
-      .application-actions { display: flex; justify-content: center; margin-top: 30px; }
+      .application-actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 30px; }
       .application-button { display: inline-flex; align-items: center; justify-content: center; min-height: 50px; padding: 0 24px; border-radius: 999px; background: var(--fg-1); color: white; font-weight: 600; text-decoration: none; }
       .application-button:hover { opacity: .86; }
-      .embed-placeholder { margin: 30px 0 0; padding: 42px 28px; border: 1px dashed var(--fg-3); border-radius: 18px; background: var(--surface-accent); text-align: center; }
-      .embed-placeholder strong { display: block; margin-bottom: 8px; font-size: 18px; }
-      .embed-placeholder p { margin: 0 auto; max-width: 560px; color: var(--fg-2); }
+      .application-meta { font-size: 14px; color: var(--fg-3); }
       .ask-list { margin-top: 24px; }
+      .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; margin-top: 30px; }
+      .step-card { padding: 22px 20px; border-radius: 18px; background: var(--surface-accent); }
+      .step-num { display: inline-flex; align-items: center; justify-content: center; width: 30px; height: 30px; border-radius: 999px; background: var(--fg-1); color: white; font-weight: 600; font-size: 14px; margin-bottom: 12px; }
+      .step-card h3 { margin: 0 0 6px; font-size: 16px; }
+      .step-card p { margin: 0; font-size: 14px; color: var(--fg-2); }
+      @media (max-width: 860px) { .steps-grid { grid-template-columns: 1fr 1fr; } }
+      @media (max-width: 560px) { .steps-grid { grid-template-columns: 1fr; } }
+      .application-block { margin-top: 30px; padding: 36px 28px; border-radius: 18px; background: var(--surface-accent); text-align: center; }
+      .application-block p { max-width: 560px; margin: 0 auto 20px; color: var(--fg-2); }
+      .application-block .application-meta { display: block; margin: 12px auto 0; }
     </style>
   </head>
   <body>
@@ -42,8 +64,8 @@
         <p class="eyebrow">Founding Athletes · Fall 2026</p>
         <h1>Train for something real. Help shape the coach that <span class="italic">gets you there</span>.</h1>
         <p class="lede">Justus is inviting a small cohort of amateur athletes with a real event on the calendar: fall marathons and half-marathons, triathlons, distance swims, rides, and other meaningful finish lines.</p>
-        <div class="application-actions"><a class="application-button" href="#application" data-application-cta="hero">Apply for the founding cohort</a></div>
-        <p class="cohort-note">This is not a mass beta program. We are selecting athletes whose training can teach us where a private, adaptive coach is most useful.</p>
+        <div class="application-actions"><a class="application-button" href="#application" data-application-cta="hero">Apply for the founding cohort</a><span class="application-meta">Takes about three minutes · Roughly 30 spots</span></div>
+        <p class="cohort-note">This is not a mass beta program. We are selecting roughly 30 athletes whose training can teach us where a private, adaptive coach is most useful. Applications are reviewed on a rolling basis and close when the cohort fills.</p>
       </section>
 
       <section class="answer" aria-label="What founding athletes receive">
@@ -90,6 +112,16 @@
         <p>Because the work is more consequential than testing whether buttons function. Founding athletes help define what good coaching feels like when a plan meets missed weeks, travel, family demands, fatigue, strength work, and uncertainty before a race. We are looking for a small number of people who want to train well and leave the product better than they found it.</p>
       </section>
 
+      <section class="section">
+        <h2>How it <span class="italic">works</span>.</h2>
+        <div class="steps-grid">
+          <div class="step-card"><span class="step-num">1</span><h3>Apply</h3><p>Four short questions about your event and how you train. About three minutes.</p></div>
+          <div class="step-card"><span class="step-num">2</span><h3>Hear back</h3><p>Every application is read by the founder. Replies go out within a few days, on a rolling basis.</p></div>
+          <div class="step-card"><span class="step-num">3</span><h3>Onboard in conversation</h3><p>Tell the coach your race, connect your watch data, and get your first plan — no forms, no templates.</p></div>
+          <div class="step-card"><span class="step-num">4</span><h3>Train your block</h3><p>The coach adapts week by week. You train for your race and tell us the truth about the experience.</p></div>
+        </div>
+      </section>
+
       <section class="section" id="application">
         <h2>Apply to become a <span class="italic">Founding Athlete</span>.</h2>
         <p>Applications are intentionally short. We want enough context to understand your event and how you train today.</p>
@@ -103,10 +135,41 @@
           </ul>
         </div>
 
-        <!-- TODO(JUS-144): Replace this placeholder with the Airtable shared-form iframe once Gideon creates the form. Preserve the surrounding #application section and data tracking attributes. -->
-        <div class="embed-placeholder" data-airtable-embed-placeholder>
-          <strong>Airtable application form goes here</strong>
-          <p>Paste the Airtable shared-form embed code in this block. The location, mobile spacing, and analytics hooks are ready.</p>
+        <!-- TODO(JUS-144): When the Airtable shared form exists, replace the .application-block div below with the Airtable iframe embed. Keep the #application section id and add data-application-cta tracking if the embed allows a wrapper CTA. -->
+        <div class="application-block" data-airtable-embed-placeholder>
+          <p>Applications go straight to the founder — no form software, no screening service. Answer the four questions above in an email, and you will hear back from Gideon personally.</p>
+          <a class="application-button" href="mailto:hello@justus.health?subject=Founding%20Athlete%20application&amp;body=My%20race%20or%20event%20(and%20its%20date)%3A%0A%0AMy%20watch%20or%20training%20device%3A%0A%0AWhat%20I%20use%20to%20plan%20my%20training%20today%3A%0A%0AAbout%20my%20training%3A%0A" data-application-cta="email">Email your application</a>
+          <span class="application-meta">The questions arrive pre-filled — just answer and send.</span>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <h2>Common questions <span class="italic">from applicants</span>.</h2>
+        <div class="faq-list">
+          <details class="faq-item" open>
+            <summary class="faq-q"><span>Is the founding athlete program really free?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Yes. Selected founding athletes use the Justus research preview free from onboarding through their event, with no card required. In exchange we ask for candid feedback during the block.</p></div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>How much time does the feedback part take?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Very little beyond training. Talking to the coach is the research — plus a short weekly check-in and honesty when something feels off. There are no long surveys or scheduled testing sessions.</p></div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>What devices and platforms does Justus work with?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>iOS and Android. Justus reads training data through Apple Health and Health Connect, so Apple Watch, Garmin, COROS, Suunto, Polar, Fitbit and most other devices work as long as workouts sync to your phone.</p></div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>My event is not a marathon. Can I still apply?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Yes. Half-marathons, triathlons, open-water swims, gran fondos, ultras, a first 10K — what matters is a real event with a date and a training block in front of it.</p></div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>What happens after my race?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Founding athletes keep free access through the research preview, and they get the first say in what the coach learns next. Nothing converts to a paid plan without you choosing it.</p></div></div></div>
+          </details>
+          <details class="faq-item">
+            <summary class="faq-q"><span>Is my training visible to anyone else?</span><span class="faq-icon" aria-hidden="true"></span></summary>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>No. Justus has no feeds, followers, leaderboards, or public profiles — permanently. Your training stays between you and your coach.</p></div></div></div>
+          </details>
         </div>
       </section>
 
