@@ -17,6 +17,7 @@ Justus is in research preview through 2026, opening to early users in small wave
 
 - [Home](https://justus.health/): Landing page with waitlist signup.
 - [Beta](https://justus.health/beta/): Research-preview onboarding instructions (TestFlight + Google Group).
+- [Founding Athletes](https://justus.health/founding-athletes/): Application page for the fall-event founding cohort.
 - [Compare](https://justus.health/compare/): Index of all Justus comparison pages.
 - [Privacy](https://justus.health/privacy/): Privacy policy.
 - [Terms](https://justus.health/terms/): Terms of service.
@@ -44,6 +45,7 @@ Justus is in research preview through 2026, opening to early users in small wave
 - [Best fitness app for beginners](https://justus.health/guides/fitness-app-for-beginners/): What "beginner-friendly" actually means.
 - [Adaptive fitness apps](https://justus.health/guides/adaptive-fitness-app/): Apps that adjust when you miss workouts or get injured.
 - [Best strength training app](https://justus.health/guides/best-strength-training-app/): Ranked by job: coach vs algorithm vs logger.
+- [Best marathon training app in 2026](https://justus.health/guides/marathon-training-app/): Honest comparison of Runna, Garmin Coach, TrainingPeaks, Nike Run Club, chatbot self-coaching, and Justus.
 
 ## Technical context for AI agents
 

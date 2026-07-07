@@ -1010,6 +1010,84 @@
           font-size: 15px;
         }
       }
+
+
+      /* ─── Event-athlete callout ─── */
+      .event-athlete {
+        max-width: 820px;
+        margin: 0 auto 120px;
+        padding: 56px 60px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 28px;
+        text-align: left;
+      }
+      .event-athlete .event-kicker {
+        margin: 0 0 14px;
+        color: var(--success);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 1.2px;
+        text-transform: uppercase;
+      }
+      .event-athlete h2 {
+        margin: 0 0 18px;
+        font-size: clamp(32px, 5vw, 48px);
+        line-height: 1.08;
+        letter-spacing: -1.2px;
+      }
+      .event-athlete h2 em {
+        color: var(--success);
+        font-family: var(--font-logo);
+        font-weight: var(--fw-semibold);
+      }
+      .event-athlete > p {
+        max-width: 680px;
+        margin: 0 0 30px;
+        color: var(--fg-2);
+        font-size: 18px;
+        line-height: 1.65;
+      }
+      .event-athlete-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin: 0 0 32px;
+      }
+      .event-athlete-card {
+        padding: 20px;
+        background: var(--surface-accent);
+        border-radius: 16px;
+      }
+      .event-athlete-card strong {
+        display: block;
+        margin-bottom: 7px;
+        font-size: 15px;
+      }
+      .event-athlete-card span {
+        color: var(--fg-2);
+        font-size: 14px;
+        line-height: 1.5;
+      }
+      .event-athlete-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--fg-1);
+        font-weight: 600;
+        text-decoration: none;
+        border-bottom: 1px solid var(--success);
+        padding-bottom: 3px;
+      }
+      .event-athlete-link:hover { color: var(--success); }
+      @media (max-width: 720px) {
+        .event-athlete {
+          margin-bottom: 88px;
+          padding: 38px 26px;
+          border-radius: 22px;
+        }
+        .event-athlete-grid { grid-template-columns: 1fr; }
+      }
     </style>
   </head>
   <body>
@@ -1098,6 +1176,25 @@
         <span>More below</span>
         <span class="line"></span>
       </div>
+
+
+      <!-- ────────── Training for something ────────── -->
+      <section class="event-athlete" id="training-for-something">
+        <p class="event-kicker">Training for something?</p>
+        <h2>Your race has a date. Your plan should know <em>what happened this week</em>.</h2>
+        <p>
+          A fall marathon, a first half, a triathlon, a distance swim: the plan is only useful
+          while it still fits your real life. Justus keeps the block private, reads the training
+          data already on your watch, and reshapes the weeks ahead when travel, illness, soreness,
+          or one missed long session changes the math.
+        </p>
+        <div class="event-athlete-grid">
+          <div class="event-athlete-card"><strong>The date stays visible</strong><span>Your goal event anchors the block, even when individual weeks move.</span></div>
+          <div class="event-athlete-card"><strong>Your watch is part of the conversation</strong><span>The coach can respond to what you actually did, not only what the plan prescribed.</span></div>
+          <div class="event-athlete-card"><strong>Strength fits around the sport</strong><span>Running, lifting, swimming, mobility, and recovery are coordinated instead of competing.</span></div>
+        </div>
+        <a class="event-athlete-link" href="/founding-athletes/">Apply for the fall-race founding cohort <span aria-hidden="true">→</span></a>
+      </section>
 
       <!-- ────────── Why Justus ────────── -->
       <section class="why" id="why">
