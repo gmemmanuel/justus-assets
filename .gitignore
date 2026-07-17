@@ -1,0 +1,7 @@
+# Agent skill mirrors synced from the justus app repo (scripts/sync-agent-skills.js).
+# This repo is PUBLIC and served raw at justus.health (.nojekyll) — these must
+# never be committed or they publish to the live site.
+.agents/
+.claude/
+.factory/
+.DS_Store
