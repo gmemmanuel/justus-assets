@@ -748,3 +748,35 @@ footer.site-footer a:hover {
     font-size: 15px;
   }
 }
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  .faq-a-wrap,
+  .faq-icon::before,
+  .faq-icon::after,
+  .compare-card,
+  .application-button {
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ─── In-content links (guides/comparisons) ─── */
+.section p a,
+.dive p a,
+.answer li a,
+.faq-a a {
+  color: var(--fg-1);
+  text-decoration: none;
+  border-bottom: 1px solid var(--success);
+  padding-bottom: 1px;
+  transition: color 140ms ease;
+}
+.section p a:hover,
+.dive p a:hover,
+.answer li a:hover,
+.faq-a a:hover {
+  color: var(--success);
+}
