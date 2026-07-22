@@ -5,3 +5,8 @@
 .claude/
 .factory/
 .DS_Store
+
+# Founder-only analytics dashboard: local IP config + generated output.
+scripts/dashboard/config.local.json
+scripts/dashboard/out/
+scripts/dashboard/__pycache__/

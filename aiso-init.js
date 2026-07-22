@@ -13,6 +13,22 @@ posthog.init('phc_pbMi5H1xZJmtZDDOw3plQzjBzs4dt8ohf1nY54Nl9N8', {
   capture_pageleave: true,
 });
 
+/* ─── Internal opt-out: visit any page once with ?internal=1 to stop
+ * counting this browser (founder/testing devices). ?internal=0 re-enables. ─── */
+(function () {
+  try {
+    var flag = new URLSearchParams(window.location.search).get('internal');
+    if (flag === '1') localStorage.setItem('justus_internal', '1');
+    if (flag === '0') {
+      localStorage.removeItem('justus_internal');
+      posthog.opt_in_capturing();
+    }
+    if (localStorage.getItem('justus_internal') === '1') {
+      posthog.opt_out_capturing();
+    }
+  } catch (e) {}
+})();
+
 window.addEventListener('load', function () {
   try {
     posthog.register({
