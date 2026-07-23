@@ -1,0 +1,70 @@
+name: Apply canonical URL fixes
+
+on:
+  push:
+    branches:
+      - gideon/fix-search-canonical-urls
+
+permissions:
+  contents: write
+
+jobs:
+  apply:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: gideon/fix-search-canonical-urls
+
+      - name: Apply canonical URL fixes
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          def insert_after(path, needle, insertion):
+              file = Path(path)
+              text = file.read_text()
+              if insertion.strip() not in text:
+                  if needle not in text:
+                      raise SystemExit(f"Expected text not found in {path}: {needle}")
+                  text = text.replace(needle, needle + "\n" + insertion, 1)
+                  file.write_text(text)
+
+          insert_after(
+              "privacy/index.html",
+              "    <title>Privacy &amp; Data Use Policy - Justus</title>",
+              '    <link rel="canonical" href="https://justus.health/privacy/" />',
+          )
+          insert_after(
+              "terms/index.html",
+              "    <title>Terms of Service - Justus</title>",
+              '    <link rel="canonical" href="https://justus.health/terms/" />',
+          )
+
+          redirect = Path("privacy.html")
+          text = redirect.read_text()
+          text = text.replace(
+              '<meta http-equiv="refresh" content="0; url=/privacy/index.html" />',
+              '<meta http-equiv="refresh" content="0; url=/privacy/" />',
+          )
+          if '<link rel="canonical" href="https://justus.health/privacy/" />' not in text:
+              text = text.replace(
+                  "    <title>Privacy Policy - Justus</title>",
+                  '    <title>Privacy Policy - Justus</title>\n    <link rel="canonical" href="https://justus.health/privacy/" />',
+                  1,
+              )
+          text = text.replace('href="/privacy/index.html"', 'href="/privacy/"')
+          text = text.replace('>/privacy/index.html</a>', '>/privacy/</a>')
+          redirect.write_text(text)
+
+          Path(".github/workflows/apply-canonical-fixes.yml").unlink()
+          PY
+
+      - name: Commit fixes
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add privacy/index.html terms/index.html privacy.html .github/workflows/apply-canonical-fixes.yml
+          git commit -m "Fix canonical URLs for legal pages"
+          git push
