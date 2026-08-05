@@ -25,35 +25,34 @@ jobs:
           path = Path('index.html')
           html = path.read_text(encoding='utf-8')
 
-          css_anchor = """      .demo-phone-screen {
-"""
-          video_css = """      .demo-video {
-        display: block;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 38px;
-        background: #000;
-      }
-      .demo-phone-screen {
-"""
+          css_anchor = "      .demo-phone-screen {\n"
+          video_css = (
+              "      .demo-video {\n"
+              "        display: block;\n"
+              "        width: 100%;\n"
+              "        height: 100%;\n"
+              "        object-fit: cover;\n"
+              "        border-radius: 38px;\n"
+              "        background: #000;\n"
+              "      }\n"
+              "      .demo-phone-screen {\n"
+          )
           if css_anchor not in html:
               raise SystemExit('Could not find demo phone CSS anchor')
           html = html.replace(css_anchor, video_css, 1)
 
-          responsive_anchor = """        .demo-phone-screen {
-          border-radius: 30px;
-          padding: 44px 12px 12px;
-        }
-"""
-          responsive_replacement = """        .demo-phone-screen {
-          border-radius: 30px;
-          padding: 44px 12px 12px;
-        }
-        .demo-video {
-          border-radius: 30px;
-        }
-"""
+          responsive_anchor = (
+              "        .demo-phone-screen {\n"
+              "          border-radius: 30px;\n"
+              "          padding: 44px 12px 12px;\n"
+              "        }\n"
+          )
+          responsive_replacement = (
+              responsive_anchor
+              + "        .demo-video {\n"
+              + "          border-radius: 30px;\n"
+              + "        }\n"
+          )
           if responsive_anchor not in html:
               raise SystemExit('Could not find responsive demo CSS anchor')
           html = html.replace(responsive_anchor, responsive_replacement, 1)
@@ -65,34 +64,37 @@ jobs:
           if start == -1 or end == -1:
               raise SystemExit('Could not find static demo markup')
 
-          video_markup = """          <div class="demo-phone">
-            <video
-              class="demo-video"
-              controls
-              playsinline
-              preload="metadata"
-              aria-label="Justus app demo video"
-            >
-              <source
-                src="/media/Youtube%20version%20of%20app%20video.mp4"
-                type="video/mp4"
-              />
-              Your browser does not support embedded video.
-            </video>
-          </div>
-"""
+          video_markup = (
+              "          <div class=\"demo-phone\">\n"
+              "            <video\n"
+              "              class=\"demo-video\"\n"
+              "              controls\n"
+              "              playsinline\n"
+              "              preload=\"metadata\"\n"
+              "              aria-label=\"Justus app demo video\"\n"
+              "            >\n"
+              "              <source\n"
+              "                src=\"/media/Youtube%20version%20of%20app%20video.mp4\"\n"
+              "                type=\"video/mp4\"\n"
+              "              />\n"
+              "              Your browser does not support embedded video.\n"
+              "            </video>\n"
+              "          </div>\n"
+          )
           html = html[:start] + video_markup + html[end:]
 
-          old_caption = """          <p class="demo-caption">
-            The Home screen from the current build: today's session, the
-            week ahead, and the coach <em>one message away</em>.
-          </p>
-"""
-          new_caption = """          <p class="demo-caption">
-            A real look at Justus in action: planning, adapting, and staying
-            with you <em>one message at a time</em>.
-          </p>
-"""
+          old_caption = (
+              "          <p class=\"demo-caption\">\n"
+              "            The Home screen from the current build: today's session, the\n"
+              "            week ahead, and the coach <em>one message away</em>.\n"
+              "          </p>\n"
+          )
+          new_caption = (
+              "          <p class=\"demo-caption\">\n"
+              "            A real look at Justus in action: planning, adapting, and staying\n"
+              "            with you <em>one message at a time</em>.\n"
+              "          </p>\n"
+          )
           if old_caption not in html:
               raise SystemExit('Could not find demo caption')
           html = html.replace(old_caption, new_caption, 1)
