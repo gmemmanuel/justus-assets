@@ -1,0 +1,31 @@
+name: Update application reader copy
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  update-copy:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - name: Update application copy
+        run: |
+          python -c "from pathlib import Path; p=Path('founding-athletes/index.html'); s=p.read_text(encoding='utf-8'); old='Every application is read by Gideon.'; new='Every application is read by the team.'; assert old in s, 'copy not found'; p.write_text(s.replace(old, new, 1), encoding='utf-8')"
+
+      - name: Commit change and remove workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add founding-athletes/index.html
+          git rm .github/workflows/update-application-reader.yml
+          git commit -m "Update founding athlete application copy"
+          git push origin main
