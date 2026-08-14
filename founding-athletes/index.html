@@ -37,11 +37,11 @@
 
       .hero {
         display: grid;
-        grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
-        column-gap: 80px;
+        grid-template-columns: minmax(0, 1.1fr) minmax(320px, .9fr);
+        column-gap: 72px;
         row-gap: 18px;
-        align-items: end;
-        padding: 94px 0 76px;
+        align-items: start;
+        padding: 72px 0 68px;
         border-bottom: 1px solid var(--border);
       }
 
@@ -54,7 +54,8 @@
 
       .hero h1 {
         grid-column: 1;
-        max-width: none;
+        align-self: start;
+        max-width: 680px;
         margin: 0;
         font-size: clamp(52px, 5vw, 70px);
         letter-spacing: -1.8px;
@@ -63,14 +64,15 @@
 
       .hero-side {
         grid-column: 2;
-        align-self: end;
-        padding-bottom: 4px;
+        align-self: start;
+        max-width: 460px;
+        padding-bottom: 0;
       }
 
       .hero .lede {
         max-width: none;
         margin: 0;
-        font-size: 18px;
+        font-size: 17px;
         line-height: 1.6;
       }
 
@@ -400,9 +402,9 @@
     <main class="shell">
       <section class="hero">
         <p class="eyebrow">Founding Athletes · Fall 2026</p>
-        <h1>Train for your event. Help shape <span class="italic">Justus</span>.</h1>
+        <h1>Train for your event.<br />Help shape <span class="italic">Justus</span>.</h1>
         <div class="hero-side">
-          <p class="lede">You're training for a race. You also have work, family, travel, sore legs, missed workouts, and weeks that don’t go according to plan. We’re choosing about 30 Founding Athletes to use Justus free through their event, train with it seriously, and tell us candidly where the coach helps and where it gets things wrong.</p>
+          <p class="lede">You're training for a race. You also have work, family, travel, sore legs, missed workouts, and weeks that don’t go according to plan. We’re choosing about 30 Founding Athletes to use Justus free through their event and tell us candidly where the coach helps and where it gets things wrong.</p>
           <div class="application-actions">
             <a class="application-button" href="#application" data-application-cta="hero">Apply for the cohort</a>
             <span class="application-meta">About three minutes · Applications reviewed on a rolling basis</span>
