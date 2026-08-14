@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Founding Athletes: train your fall event with Justus</title>
-    <meta name="description" content="Apply to the Justus Founding Athletes cohort for fall 2026. Selected athletes receive free research-preview access through their training block and help shape a private AI fitness coach." />
+    <meta name="description" content="Apply to the Justus Founding Athletes cohort for fall 2026. Selected athletes use Justus free through their event, train with it seriously, and help shape a private AI fitness coach." />
     <link rel="canonical" href="https://justus.health/founding-athletes/" />
     <meta property="og:title" content="Founding Athletes: train your fall event with Justus" />
-    <meta property="og:description" content="A small founding cohort for athletes training toward a real event. Free research-preview access, direct founder contact, and a voice in how the coach develops." />
+    <meta property="og:description" content="A small founding cohort for athletes training toward a real event. Free access through your event, a direct line to Gideon, and a real say in what gets built." />
     <meta property="og:url" content="https://justus.health/founding-athletes/" />
     <meta property="og:type" content="website" />
     <meta property="og:image" content="https://justus.health/splash-icon.png" />
@@ -20,10 +20,10 @@
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
-        {"@type":"Question","name":"Is the Founding Athletes program free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Selected athletes use Justus free through their event. No card is required. We ask for brief, candid feedback during the training block."}},
-        {"@type":"Question","name":"What events and devices are a fit?","acceptedAnswer":{"@type":"Answer","text":"The cohort is open to runners, triathletes, cyclists, swimmers, and other athletes training toward a dated event. Justus works on iOS and Android and reads workouts through Apple Health and Health Connect."}},
-        {"@type":"Question","name":"How much feedback is expected?","acceptedAnswer":{"@type":"Answer","text":"A short weekly check-in and honest notes when something works or does not. There are no long surveys or scheduled testing sessions."}},
-        {"@type":"Question","name":"What happens after my event?","acceptedAnswer":{"@type":"Answer","text":"Nothing converts to a paid plan automatically. Founding athletes keep free access through the research preview and can decide later whether they want to continue."}}
+        {"@type":"Question","name":"Is the Founding Athletes program free?","acceptedAnswer":{"@type":"Answer","text":"Yes. Selected athletes use Justus free through their event. No card is required."}},
+        {"@type":"Question","name":"What events and devices are a fit?","acceptedAnswer":{"@type":"Answer","text":"Running, triathlon, cycling, swimming, and other dated events are welcome. Justus works on iOS and Android and reads workouts through Apple Health and Health Connect. Wearables that send workout data to Apple Health or Health Connect can work with Justus."}},
+        {"@type":"Question","name":"How much feedback is expected?","acceptedAnswer":{"@type":"Answer","text":"A short weekly check-in is the baseline. Beyond that, tell us when something works, when the coach gets something wrong, or when the product gets in your way."}},
+        {"@type":"Question","name":"What happens after my event?","acceptedAnswer":{"@type":"Answer","text":"Nothing converts automatically. Founding Athletes keep free access through the research preview and can decide later whether they want to continue."}}
       ]
     }
     </script>
@@ -111,6 +111,48 @@
         text-align: left;
       }
 
+      .origin-section {
+        display: grid;
+        grid-template-columns: minmax(220px, .65fr) minmax(0, 1.35fr);
+        gap: 72px;
+        padding: 80px 0 84px;
+        border-bottom: 1px solid var(--border);
+      }
+
+      .origin-section .label,
+      .cohort-column .label,
+      .application-section > .application-intro .label {
+        margin: 0 0 18px;
+        color: var(--success);
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 1.4px;
+        text-transform: uppercase;
+      }
+
+      .origin-heading h2 {
+        max-width: 390px;
+        margin: 0;
+        font-size: clamp(30px, 3vw, 40px);
+        line-height: 1.15;
+        letter-spacing: -.7px;
+      }
+
+      .origin-copy {
+        max-width: 660px;
+      }
+
+      .origin-copy p {
+        margin: 0 0 20px;
+        color: var(--fg-2);
+        font-size: 17px;
+        line-height: 1.68;
+      }
+
+      .origin-copy p:last-child {
+        margin-bottom: 0;
+      }
+
       .cohort-grid {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -127,16 +169,6 @@
       .cohort-column:last-child {
         padding-left: 64px;
         border-left: 1px solid var(--border);
-      }
-
-      .cohort-column .label,
-      .application-section > .application-intro .label {
-        margin: 0 0 18px;
-        color: var(--success);
-        font-size: 11px;
-        font-weight: 600;
-        letter-spacing: 1.4px;
-        text-transform: uppercase;
       }
 
       .cohort-column h2 {
@@ -281,6 +313,16 @@
           margin-top: 24px;
         }
 
+        .origin-section {
+          grid-template-columns: 1fr;
+          gap: 24px;
+          padding: 60px 0 64px;
+        }
+
+        .origin-heading h2 {
+          max-width: 620px;
+        }
+
         .cohort-grid {
           grid-template-columns: 1fr;
           gap: 52px;
@@ -360,7 +402,7 @@
         <p class="eyebrow">Founding Athletes · Fall 2026</p>
         <h1>Train for your event. Help shape <span class="italic">Justus</span>.</h1>
         <div class="hero-side">
-          <p class="lede">We are choosing about 30 athletes with a real event on the calendar to use Justus free through their training block and help us improve the coach.</p>
+          <p class="lede">You're training for a race. You also have work, family, travel, sore legs, missed workouts, and weeks that don’t go according to plan. We’re choosing about 30 Founding Athletes to use Justus free through their event, train with it seriously, and tell us candidly where the coach helps and where it gets things wrong.</p>
           <div class="application-actions">
             <a class="application-button" href="#application" data-application-cta="hero">Apply for the cohort</a>
             <span class="application-meta">About three minutes · Applications reviewed on a rolling basis</span>
@@ -368,25 +410,37 @@
         </div>
       </section>
 
+      <section class="origin-section" aria-label="Why we are doing this">
+        <div class="origin-heading">
+          <p class="label">Why we are doing this</p>
+          <h2>A chatbot can give good advice. That doesn’t make it a coach.</h2>
+        </div>
+        <div class="origin-copy">
+          <p>The idea for Justus started when Gideon watched a marathon-running friend use an AI chatbot as a coach. The advice could be useful, but his friend still had to track workouts somewhere else, explain what happened, keep the plan up to date, and carry the context from one conversation to the next.</p>
+          <p>Gideon works in software in Boston and has been a runner for most of his life — not an elite one, just someone who wanted to understand his own training better. He started building Justus around a simple idea: AI intelligence is surprisingly good, but it needs the rest of the coaching system around it. A memory of who you are. Your actual workouts. A plan that can change. Proactive engagement.</p>
+          <p>Founding Athletes will help find out where that works in real training and where it still needs to get better.</p>
+        </div>
+      </section>
+
       <section class="cohort-grid" aria-label="Founding Athletes cohort details">
         <div class="cohort-column">
-          <p class="label">Who it is for</p>
+          <p class="label">Who we are looking for</p>
           <h2>A real goal, with real life around it.</h2>
-          <p>You do not need to be elite. You do need a dated event and a willingness to tell us what the coach gets right or wrong.</p>
+          <p>We’re looking for people with an event on the calendar who will genuinely use Justus as their coach in the weeks leading up to it.</p>
           <ul class="cohort-list">
             <li><strong>An event in the coming months</strong><span>A marathon, half, triathlon, ride, swim, or another meaningful finish line.</span></li>
-            <li><strong>A watch or training device</strong><span>Workouts that sync through Apple Health or Health Connect.</span></li>
-            <li><strong>Brief, honest feedback</strong><span>A short weekly check-in while you train.</span></li>
+            <li><strong>Serious use while you train</strong><span>Plan with Justus, ask questions, log what happened, make changes, and keep using it when the original plan stops fitting the week.</span></li>
+            <li><strong>Brief, honest feedback</strong><span>A short weekly check-in. Tell us when the coach is useful, wrong, confusing, or missing something.</span></li>
           </ul>
         </div>
 
         <div class="cohort-column">
           <p class="label">What you receive</p>
-          <h2>A private coach for the whole block.</h2>
-          <p>Justus helps plan the week, reads what actually happened, and adjusts when training meets travel, fatigue, soreness, or missed sessions.</p>
+          <h2>A private coach through your event and a real say in what gets built.</h2>
+          <p>Justus helps plan your training, reads what you actually did, remembers the context, and can reshape the weeks ahead when travel, fatigue, soreness, or a missed session changes the plan.</p>
           <ul class="cohort-list">
             <li><strong>Free access through your event</strong><span>No card and no automatic conversion to a paid plan.</span></li>
-            <li><strong>Direct contact with the founder</strong><span>Your feedback goes straight to Gideon and shapes the product.</span></li>
+            <li><strong>A direct line to Gideon</strong><span>Gideon is building Justus here in Boston. If the coach makes a bad call, something is confusing, or you have an idea that would make it more useful, your feedback reaches him directly and can shape what’s built next.</span></li>
             <li><strong>Private by design</strong><span>No feed, followers, leaderboards, or public training profile.</span></li>
           </ul>
         </div>
@@ -399,7 +453,7 @@
             <h2>Tell us what you are training for.</h2>
           </div>
           <div class="application-intro-copy">
-            <p>The form asks about your event, your device, and how you plan training today. Every application is read by the team.</p>
+            <p>The form asks about your event, your device, and how you plan your training today. Every application is read by Gideon.</p>
           </div>
         </div>
         <div class="form-frame">
@@ -416,15 +470,15 @@
           </details>
           <details class="faq-item">
             <summary class="faq-q"><span>What events and devices are a fit?</span><span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Running, triathlon, cycling, swimming, and other dated events are welcome. Justus works on iOS and Android and reads workouts through Apple Health and Health Connect.</p></div></div></div>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Running, triathlon, cycling, swimming, and other dated events are welcome. Justus works on iOS and Android and reads workouts through Apple Health and Health Connect. Any wearable that sends workout data to Apple Health or Health Connect can work with Justus; you just need to connect it there so the data can flow to Justus.</p></div></div></div>
           </details>
           <details class="faq-item">
             <summary class="faq-q"><span>How much feedback is expected?</span><span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>A short weekly check-in and honest notes when something works or does not. No long surveys or scheduled testing sessions.</p></div></div></div>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>A short weekly check-in is the baseline. Beyond that, tell us when something works, when the coach gets something wrong, or when the product gets in your way.</p></div></div></div>
           </details>
           <details class="faq-item">
             <summary class="faq-q"><span>What happens after my event?</span><span class="faq-icon" aria-hidden="true"></span></summary>
-            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Nothing converts automatically. Founding athletes keep free access through the research preview and can decide later whether they want to continue.</p></div></div></div>
+            <div class="faq-a-wrap"><div class="faq-a-inner"><div class="faq-a"><p>Nothing converts automatically. Founding Athletes keep free access through the research preview and can decide later whether they want to continue.</p></div></div></div>
           </details>
         </div>
       </section>
