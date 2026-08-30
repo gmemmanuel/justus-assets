@@ -1,12 +1,12 @@
 # Justus — robots.txt
 # Allow all crawlers including AI search agents (GPTBot, ClaudeBot, Google-Extended, PerplexityBot, etc.)
+# Public site content is crawlable except invite-only tester pages.
 
 User-agent: *
 Allow: /
 Disallow: /beta/
 Disallow: /foundingcohort/welcome/
 
-# Invite-only pages are not for public indexing.
-# They also include a <meta name="robots" content="noindex, nofollow"> on the page itself.
+# Invite-only tester pages also include <meta name="robots" content="noindex, nofollow">.
 
 Sitemap: https://justus.health/sitemap.xml
