@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Justus · Founding Athletes</title>
+    <link rel="icon" type="image/svg+xml" href="/bimi-logo.svg" />
+    <link rel="apple-touch-icon" href="/splash-icon.png" />
+    <script src="https://getlaunchlist.com/js/widget-diy.js" defer></script>
+    <style>
+      :root {
+        --bg: #faf9f7;
+        --surface: #ffffff;
+        --fg: #1a1a1a;
+        --muted: #6b6b6b;
+        --faint: #9c9c9c;
+        --border: #e8e8e8;
+        --green: #5c8a5c;
+        --ui: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Segoe UI', Roboto, sans-serif;
+        --serif: Georgia, 'Times New Roman', serif;
+      }
+      * { box-sizing: border-box; }
+      html, body { margin: 0; background: var(--bg); color: var(--fg); font-family: var(--ui); -webkit-font-smoothing: antialiased; }
+      .nav { position: sticky; top: 0; z-index: 10; background: rgba(250,249,247,.88); backdrop-filter: blur(18px); border-bottom: 1px solid transparent; }
+      .nav.scrolled { border-bottom-color: var(--border); }
+      .nav-inner, .shell, footer { max-width: 720px; margin: 0 auto; }
+      .nav-inner { padding: 20px 32px; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; }
+      .mark { font-family: var(--serif); color: var(--green); font-size: 24px; font-weight: 600; text-decoration: none; }
+      .stamp { color: var(--faint); font-size: 13px; font-style: italic; }
+      .shell { padding: 52px 32px 96px; }
+      .hero { text-align: center; margin-bottom: 36px; }
+      h1 { margin: 0 0 16px; font-size: 44px; line-height: 1.08; letter-spacing: -.8px; }
+      .green { color: var(--green); font-family: var(--serif); font-style: italic; }
+      .sub { max-width: 520px; margin: 0 auto; color: var(--muted); font-size: 18px; line-height: 1.55; font-style: italic; }
+      .intro { max-width: 620px; margin: 0 auto 42px; font-size: 18px; line-height: 1.68; }
+      .intro p { margin: 0 0 16px; }
+      .drawers { border-top: 1px solid var(--border); }
+      details { border-bottom: 1px solid var(--border); }
+      summary { list-style: none; cursor: pointer; padding: 20px 4px; display: flex; justify-content: space-between; align-items: center; gap: 20px; font-size: 16px; font-weight: 500; }
+      summary::-webkit-details-marker { display: none; }
+      summary:hover, details[open] summary { color: var(--green); }
+      .plus { width: 18px; height: 18px; position: relative; flex: 0 0 auto; }
+      .plus::before, .plus::after { content: ''; position: absolute; background: currentColor; }
+      .plus::before { left: 0; right: 0; top: 8px; height: 1.5px; }
+      .plus::after { top: 0; bottom: 0; left: 8px; width: 1.5px; }
+      details[open] .plus::after { display: none; }
+      .body { padding: 3px 4px 28px; }
+      .body h2 { margin: 0 0 18px; max-width: 590px; font-size: 22px; line-height: 1.28; letter-spacing: -.3px; }
+      .body p, .body li { font-size: 16px; line-height: 1.62; }
+      .body p { max-width: 590px; margin: 0 0 14px; }
+      .body ul { list-style: none; padding: 0; margin: 0; }
+      .body li { position: relative; padding: 7px 0 7px 22px; max-width: 590px; }
+      .body li::before { content: ''; position: absolute; left: 0; top: 16px; width: 12px; height: 1.5px; background: var(--faint); }
+      .body a { color: var(--fg); text-decoration-color: var(--border); text-underline-offset: 3px; }
+      .body a:hover { text-decoration-color: var(--green); }
+      .waitlist-form { display: flex; gap: 8px; align-items: center; max-width: 460px; margin-top: 18px; padding: 6px 6px 6px 22px; background: var(--surface); border: 1px solid var(--border); border-radius: 999px; }
+      .waitlist-form:focus-within { border-color: var(--muted); box-shadow: 0 0 0 4px rgba(92,138,92,.08); }
+      .waitlist-form input[type='email'] { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; color: var(--fg); font: inherit; font-size: 15px; padding: 12px 0; }
+      .waitlist-form input::placeholder { color: var(--faint); }
+      .waitlist-form button { border: 0; border-radius: 999px; background: var(--fg); color: white; font: inherit; font-size: 14px; font-weight: 600; padding: 12px 20px; cursor: pointer; }
+      .waitlist-form button:hover { opacity: .88; }
+      footer { border-top: 1px solid var(--border); padding: 30px 32px 50px; display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap; color: var(--faint); font-size: 12px; }
+      footer a { color: var(--faint); text-decoration: none; margin-left: 14px; }
+      @media (max-width: 560px) {
+        .nav-inner { padding: 16px 24px; }
+        .shell { padding: 40px 24px 72px; }
+        h1 { font-size: 34px; }
+        .sub, .intro { font-size: 16.5px; }
+        .waitlist-form { padding-left: 16px; }
+        footer { padding: 24px 24px 44px; flex-direction: column; }
+        footer a { margin-left: 0; margin-right: 14px; }
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="nav" id="site-nav">
+      <div class="nav-inner">
+        <a class="mark" href="/">Justus</a>
+        <span class="stamp">Founding Athletes · 2026</span>
+      </div>
+    </nav>
+
+    <main class="shell">
+      <section class="hero">
+        <h1>Welcome, <span class="green">Founding Athlete</span>.</h1>
+        <p class="sub">A few notes on getting the most from Justus and helping shape what it becomes.</p>
+      </section>
+
+      <div class="intro">
+        <p>You’re part of a small cohort using Justus seriously while training toward a real event. The exchange is simple: you have free access through your training block, and in return I’m asking for candid feedback about where the coach is useful, where it is wrong, and where the product gets in your way.</p>
+        <p>You do not need to treat this like software testing. The most useful thing you can do is use Justus as your actual coach and tell me what happens.</p>
+      </div>
+
+      <div class="drawers">
+        <details>
+          <summary><span>What I’m asking from you</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>Real use, honest judgment, and a short weekly reflection.</h2>
+            <ul>
+              <li><strong>Use Justus as part of your real training.</strong> Plan with it, ask questions, log what happened, and let it adapt when the week changes.</li>
+              <li><strong>Tell me when the coach gets something wrong.</strong> Bad advice, generic responses, confusing plan changes, or anything that makes you trust it less are especially useful to hear about.</li>
+              <li><strong>Send a one-minute voice memo each week.</strong> I’ll email you once a week with a simple prompt. Reply with roughly a minute on how using Justus went that week—what helped, what didn’t, and anything you noticed. No form and no polished answer needed.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span>To get the most out of Justus</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>Give the coach enough context to make useful decisions.</h2>
+            <ul>
+              <li>Do the onboarding honestly. The goal is to land on a plan you would genuinely try, not the plan you think you are supposed to want.</li>
+              <li>Connect your fitness data during onboarding so the coach can see what you actually do, not only what was planned.</li>
+              <li>Turn on notifications and connect your calendar if you want Justus to stay present in the rhythm of your training week.</li>
+              <li>Talk to the coach when life changes the plan. Travel, fatigue, soreness, missed sessions, and schedule changes are part of what this cohort is meant to test.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Wearable data sync</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>Apple Watch is the smoothest path today. Other wearables may need a bridge.</h2>
+            <p>If you use an iPhone with an Apple Watch, your data flows into Justus through Apple Health once you connect it.</p>
+            <p>If you are on Android, or use another watch such as Garmin, Fitbit, Whoop, Coros, Polar, or Suunto, the current beta sync may provide less complete history or ongoing data.</p>
+            <p>If needed, <a href="https://healthsync.app/" target="_blank" rel="noopener">Health Sync</a> can bridge supported wearable data into Apple Health or Google Health Connect. It has a free trial and a low one-time cost if you continue using it.</p>
+            <p>This is a beta limitation rather than the intended long-term experience.</p>
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Feedback and bugs</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>Use the fastest channel for the thing you noticed.</h2>
+            <ul>
+              <li><strong>Coach messages that feel off:</strong> use the thumbs down directly on the message. Use thumbs up when a response is especially good.</li>
+              <li><strong>Anything else in the product:</strong> use the feedback form in Settings. Attach a screenshot when it helps explain the issue.</li>
+              <li><strong>Weekly experience:</strong> reply to the weekly cohort email with the requested one-minute voice memo.</li>
+            </ul>
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Help me build a waitlist</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>Invite anyone you think might be interested in using the app once it’s in production.</h2>
+            <p>You can join the waitlist yourself through the join button below to get a personal referral link. That will also help me start from higher than zero when I share it widely.</p>
+            <form id="cohort-waitlist" class="waitlist-form launchlist-form" action="https://getlaunchlist.com/s/VfMDfO" method="post">
+              <input type="email" name="email" placeholder="your@email.com" required autocomplete="email" />
+              <input type="hidden" name="utm_source" value="" />
+              <input type="hidden" name="utm_medium" value="" />
+              <input type="hidden" name="utm_campaign" value="" />
+              <input type="hidden" name="utm_content" value="" />
+              <input type="hidden" name="utm_term" value="" />
+              <input type="hidden" name="referrer" value="founding-cohort-welcome" />
+              <button type="submit">Join</button>
+            </form>
+          </div>
+        </details>
+
+        <details>
+          <summary><span>Privacy during the cohort</span><span class="plus" aria-hidden="true"></span></summary>
+          <div class="body">
+            <h2>The normal privacy policy applies, with closer product review during this research period.</h2>
+            <p>The <a href="/privacy/">Justus privacy policy</a> applies to the cohort. Because this is an early research program, I will also review account-level app usage and coaching interactions more closely than I would in a mature product so I can understand where the system is working and where it is failing.</p>
+            <p>That review is for product development and coaching-quality research. If anything about that feels unclear or uncomfortable, email <a href="mailto:hello@justus.health">hello@justus.health</a>.</p>
+          </div>
+        </details>
+      </div>
+    </main>
+
+    <footer>
+      <span>Justus · Founding Athletes · 2026</span>
+      <span><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="mailto:hello@justus.health">Contact</a></span>
+    </footer>
+
+    <script>
+      (function () {
+        var nav = document.getElementById('site-nav');
+        function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 4); }
+        window.addEventListener('scroll', onScroll, { passive: true });
+        onScroll();
+      })();
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (key) {
+          var val = params.get(key);
+          if (!val) return;
+          document.querySelectorAll('input[name="' + key + '"]').forEach(function (el) { el.value = val; });
+        });
+      })();
+      document.querySelectorAll('details').forEach(function (item) {
+        item.addEventListener('toggle', function () {
+          if (!item.open) return;
+          document.querySelectorAll('details').forEach(function (other) {
+            if (other !== item) other.open = false;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
